@@ -1,7 +1,7 @@
-#define LED_1 8
-#define LED_2 9
-#define LED_3 10
-#define LED_4 11
+#define LED_1 11
+#define LED_2 10
+#define LED_3 9
+#define LED_4 8
 
 void setup() {
 	Serial.begin(9600);
@@ -11,30 +11,32 @@ void setup() {
 	pinMode(LED_4, OUTPUT);
 }
 
-// S1 -> 852
-// S2 -> 731
-// S3 -> 568
-// S4 -> 393
+// pulldown 220
+// S1 220 -> 504
+// S2 470 -> 317
+// S3 1000 -> 181
+// S4 4700 -> 43
 void loop() {
 	int analog = analogRead(A0);
-	if (analog < 450 && analog >= 300)
-	{
-		digitalWrite(LED_1, HIGH);
-	}
-	else if (analog < 650  && analog >= 500)
-	{
-		digitalWrite(LED_2, HIGH);
-	}
-	else if (analog < 750  && analog >= 700)
-	{
-		digitalWrite(LED_3, HIGH);
-	}
-	else if (analog < 950  && analog >= 800)
-	{
-		digitalWrite(LED_4, HIGH);
-	}
 	digitalWrite(LED_1, LOW);
 	digitalWrite(LED_2, LOW);
 	digitalWrite(LED_3, LOW);
 	digitalWrite(LED_4, LOW);
+	if (analog > 500)
+	{
+		digitalWrite(LED_1, HIGH);	
+	}
+	else if (analog > 300)
+	{
+		digitalWrite(LED_2, HIGH);
+	}
+	else if (analog > 150)
+	{
+		digitalWrite(LED_3, HIGH);
+	}
+	else if (analog > 20)
+	{
+		digitalWrite(LED_4, HIGH);
+	}
+	Serial.println(analog);
 }

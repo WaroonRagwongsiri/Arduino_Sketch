@@ -19,6 +19,7 @@ const int	segment_pin[] = {5,6,7,8,9,10,11,12};
 
 static int	g_ans = 1;
 static int	g_guess = 0;
+static int	g_currnum = 1;
 
 // debounce
 static int		sw_state[2];
@@ -50,15 +51,21 @@ void	loop()
 	// 	delay(2000);
 	// 	set_zero();
 	// }
+	
+	for (int i = 0; i < 8; i++)
+	{
+		digitalWrite(segment_pin[i], !bitRead(seg_pattern[g_ans], i));
+	}
 	if (g_guess == 0)
 	{
 		randomSeed(0);
 		g_guess = random(1, 10);
 		Serial.println(g_guess);
 	}
-	for (int i = 0; i < 8; i++)
+	if (g_ans == 10 || g_ans == 11 || g_ans == 0)
 	{
-		digitalWrite(segment_pin[i], bitRead(seg_pattern[g_ans], i));
+		delay(1000);
+		g_ans = g_currnum;
 	}
 	handle_add_button();
 	handle_guess_button();
@@ -113,6 +120,7 @@ void	handle_guess_button()
 
 			if (sw_state[1] == LOW)
 			{
+				g_currnum = g_ans;
 				if (g_ans == g_guess)
 				{
 					g_ans = 0;
