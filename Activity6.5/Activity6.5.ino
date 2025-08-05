@@ -18,7 +18,7 @@
 // define speaker
 #define PIEZO 3
 
-static	int	read = 0;
+static	int	read = '0';
 static	int	recorded[100] = {0};
 const	int	note[6] = {NOTE_C4, NOTE_D4, NOTE_E4, NOTE_F4, NOTE_G4, NOTE_A4};
 
@@ -31,37 +31,36 @@ void setup()
 	pinMode(SW_5, INPUT);
 	pinMode(SW_6, INPUT);
 	Serial.begin(9600);
-	Serial.println("1 : Play Record");
-	Serial.println("2 : Record");
 }
 
 void loop()
 {
 	// Check read
-	if (Serial.available())
+	if (Serial.available() && read == '0')
 	{
+		Serial.println("1 : Play Record");
+		Serial.println("2 : Record");
 		read = Serial.read();
-		// read
-		Serial.println(read);
-		if (read == '1')
-		{
-			Serial.println("-------------------");
-			Serial.println("Playing from record");
-			Serial.println("-------------------");
-			play_record();
-			read = 0;
-		}
-		else if (read == '2')
-		{
-			Serial.println("-------------------");
-			Serial.println("Recording");
-			Serial.println("-------------------");
-			record();
-			read = 0;
-		}
 	}
-	
-	if (read == 0 || read == '0')
+
+	// Process the read value
+	if (read == '1')
+	{
+		Serial.println("-------------------");
+		Serial.println("Playing from record");
+		Serial.println("-------------------");
+		play_record();
+		read = '0';
+	}
+	else if (read == '2')
+	{
+		Serial.println("-------------------");
+		Serial.println("Recording");
+		Serial.println("-------------------");
+		record();
+	}
+
+	if (read == '0')
 	{
 		// normal sw
 		if (digitalRead(SW_1) == HIGH)
@@ -89,7 +88,7 @@ void record()
 		if (Serial.available())
 		{
 			char input = Serial.read();
-			if (input != '2')
+			if (input == '1' || input == '0' || input == '2')
 			{
 				read = input;
 				return ;
