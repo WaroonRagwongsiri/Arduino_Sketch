@@ -32,6 +32,9 @@ void setup()
 	pinMode(SW_5, INPUT);
 	pinMode(SW_6, INPUT);
 	Serial.begin(9600);
+	Serial.println("1 : Play Record");
+	Serial.println("2 : Record");
+	Serial.println("-------------------");
 }
 
 void loop()
@@ -104,27 +107,29 @@ void record()
 		{
 			if (record_index < sizeof(recorded) / sizeof(recorded[0]))
 			{
-				// Wait for press start
+				int index = (note - 6) % 6;
+
+				// Start playing sound
+				tone(PIEZO, ::note[index]);
 				pressStart = millis();
 
 				// Wait until button is released
 				while (press_sw() == note);
 
-				// Capture release time
+				// Stop playing sound
 				pressEnd = millis();
-				unsigned long duration = pressEnd - pressStart;
+				noTone(PIEZO);
 
-				// Store note and duration
+				// Record
+				unsigned long duration = pressEnd - pressStart;
 				recorded[record_index] = note;
 				record_dur[record_index] = duration;
 				record_index++;
-
-				// Play with same duration
-				play_tune(note, duration);
 			}
 		}
 	}
 }
+
 
 void play_record()
 {
