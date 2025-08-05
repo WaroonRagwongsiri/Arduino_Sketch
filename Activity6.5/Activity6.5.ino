@@ -20,6 +20,7 @@
 
 static	int	read = '0';
 static	int	recorded[100] = {0};
+static	int	record_dur[100] = {0};
 const	int	note[6] = {NOTE_C4, NOTE_D4, NOTE_E4, NOTE_F4, NOTE_G4, NOTE_A4};
 
 void setup()
@@ -82,16 +83,19 @@ void record()
 {
 	int note;
 	int record_index = 0;
+	unsigned long pressStart = 0;
+	unsigned long pressEnd = 0;
 
 	while (true)
 	{
+		// Check for exit input
 		if (Serial.available())
 		{
 			char input = Serial.read();
 			if (input == '1' || input == '0' || input == '2')
 			{
 				read = input;
-				return ;
+				return;
 			}
 		}
 
@@ -100,27 +104,38 @@ void record()
 		{
 			if (record_index < sizeof(recorded) / sizeof(recorded[0]))
 			{
-				recorded[record_index++] = note;
-				play_tune(note);
-				delay(200);
+				// Wait for press start
+				pressStart = millis();
+
+				// Wait until button is released
+				while (press_sw() == note);
+
+				// Capture release time
+				pressEnd = millis();
+				unsigned long duration = pressEnd - pressStart;
+
+				// Store note and duration
+				recorded[record_index] = note;
+				record_dur[record_index] = duration;
+				record_index++;
+
+				// Play with same duration
+				play_tune(note, duration);
 			}
 		}
 	}
 }
 
-void	play_record()
+void play_record()
 {
-	int	i;
-
-	i = 0;
-	for(i = 0; i < sizeof(recorded) / sizeof(recorded[0]); i++)
+	for (int i = 0; i < sizeof(recorded) / sizeof(recorded[0]); i++)
 	{
 		if (recorded[i] == 0)
-			return ;
-		play_tune(recorded[i]);
-		delay(200);
+			return;
+
+		play_tune(recorded[i], record_dur[i]);
 	}
-	read = 0;
+	read = '0';
 }
 
 int	press_sw()
@@ -140,12 +155,15 @@ int	press_sw()
 	return 0;
 }
 
-int	play_tune(int sw)
+int play_tune(int sw, int duration)
 {
-	int	index;
-
-	index = (sw - 6) % 6;
-	tone(PIEZO, note[index], 200);
-	delay(200);
+	int index = (sw - 6) % 6;
+	tone(PIEZO, note[index], duration);
+	delay(duration);
 	return index;
+}
+
+int play_tune(int sw)
+{
+	return play_tune(sw, 200);
 }
