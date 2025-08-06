@@ -32,6 +32,7 @@ void setup()
 	pinMode(SW_5, INPUT);
 	pinMode(SW_6, INPUT);
 	Serial.begin(9600);
+	Serial.println("0 : Normal Play");
 	Serial.println("1 : Play Record");
 	Serial.println("2 : Record");
 	Serial.println("-------------------");
@@ -42,8 +43,10 @@ void loop()
 	// Check read
 	if (Serial.available() && read == '0')
 	{
+		Serial.println("0 : Normal Play");
 		Serial.println("1 : Play Record");
 		Serial.println("2 : Record");
+		Serial.println("-------------------");
 		read = Serial.read();
 	}
 
@@ -130,7 +133,6 @@ void record()
 	}
 }
 
-
 void play_record()
 {
 	for (int i = 0; i < sizeof(recorded) / sizeof(recorded[0]); i++)
@@ -165,6 +167,7 @@ int play_tune(int sw, int duration)
 	int index = (sw - 6) % 6;
 	tone(PIEZO, note[index], duration);
 	delay(duration);
+	noTone(PIEZO);
 	return index;
 }
 
