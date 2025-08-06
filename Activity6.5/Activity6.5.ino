@@ -84,7 +84,7 @@ void loop()
 
 void record()
 {
-	int note;
+	int note_l;
 	int record_index = 0;
 	unsigned long pressStart = 0;
 	unsigned long pressEnd = 0;
@@ -102,19 +102,19 @@ void record()
 			}
 		}
 
-		note = press_sw();
-		if (note != 0)
+		note_l = press_sw();
+		if (note_l != 0)
 		{
 			if (record_index < sizeof(recorded) / sizeof(recorded[0]))
 			{
-				int index = (note - 6) % 6;
+				int index = (note_l - 6) % 6;
 
 				// Start playing sound
-				tone(PIEZO, ::note[index]);
+				tone(PIEZO, note[index]);
 				pressStart = millis();
 
 				// Wait until button is released
-				while (press_sw() == note);
+				while (press_sw() == note_l);
 
 				// Stop playing sound
 				pressEnd = millis();
@@ -122,7 +122,7 @@ void record()
 
 				// Record
 				unsigned long duration = pressEnd - pressStart;
-				recorded[record_index] = note;
+				recorded[record_index] = note_l;
 				record_dur[record_index] = duration;
 				record_index++;
 			}
@@ -170,5 +170,9 @@ int play_tune(int sw, int duration)
 
 int play_tune(int sw)
 {
-	return play_tune(sw, 200);
+	int index = (sw - 6) % 6;
+	tone(PIEZO, note[index]);
+	while (digitalRead(sw) == HIGH);
+	noTone(PIEZO);
+	return index;
 }
