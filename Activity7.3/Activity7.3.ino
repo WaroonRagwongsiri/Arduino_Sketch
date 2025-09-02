@@ -2,7 +2,7 @@
 
 LedControl lc = LedControl(11, 13, 10, 4);  // CLK, DIN, CS, Number of LED Module
 
-unsigned long delaytime = 500;  // time to updates of the display
+unsigned long delaytime = 10;  // time to updates of the display
 
 void	setup()
 {
