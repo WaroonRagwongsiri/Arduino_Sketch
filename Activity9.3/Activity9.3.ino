@@ -35,19 +35,19 @@ typedef struct	s_fsm
 void	setup()
 {
 	// North
-	pinMode(N_BUTTON, INPUT);
+	pinMode(N_BUTTON, INPUT_PULLUP);
 	pinMode(LED_N_R, OUTPUT);
 	pinMode(LED_N_Y, OUTPUT);
 	pinMode(LED_N_G, OUTPUT);
 
 	// East
-	pinMode(E_BUTTON, INPUT);
+	pinMode(E_BUTTON, INPUT_PULLUP);
 	pinMode(LED_E_R, OUTPUT);
 	pinMode(LED_E_Y, OUTPUT);
 	pinMode(LED_E_G, OUTPUT);
 
 	// Walk
-	pinMode(W_BUTTON, INPUT);
+	pinMode(W_BUTTON, INPUT_PULLUP);
 	pinMode(LED_W_R, OUTPUT);
 	pinMode(LED_W_G, OUTPUT);
 }
@@ -61,7 +61,7 @@ const t_fsm	FSM[8] = {
 	{B01100100, 5000, {black, black, black, black, walk, walk, walk, walk}}, // walk
 	{B00100100, 1000, {walk_end, walk_end, walk_end, walk_end, walk_end, walk_end, walk_end, walk_end}}, // black
 	{B01100100, 1000, {walk_end, walk_end, walk_end, walk_end, walk_end, walk_end, walk_end, walk_end}}, // green
-	{B10100100, 5000, {waitE, waitN, waitE, waitN, waitE, waitN, waitE, waitN}} // walk_end
+	{B10100100, 1000, {waitE, waitN, waitE, waitN, waitE, waitN, waitE, waitN}} // walk_end
 };
 
 static int	input = 0;
@@ -75,16 +75,16 @@ static int	ST = goN;
 void	loop()
 {
 	// State LED
-	digitalWrite(LED_N_R, FSM[ST].ST_Out & B00100000);
-	digitalWrite(LED_N_Y, FSM[ST].ST_Out & B00010000);
-	digitalWrite(LED_N_G, FSM[ST].ST_Out & B00001000);
+	digitalWrite(LED_N_R, !(FSM[ST].ST_Out & B00100000));
+	digitalWrite(LED_N_Y, !(FSM[ST].ST_Out & B00010000));
+	digitalWrite(LED_N_G, !(FSM[ST].ST_Out & B00001000));
 
-	digitalWrite(LED_E_R, FSM[ST].ST_Out & B00000100);
-	digitalWrite(LED_E_Y, FSM[ST].ST_Out & B00000010);
-	digitalWrite(LED_E_G, FSM[ST].ST_Out & B00000001);
+	digitalWrite(LED_E_R, !(FSM[ST].ST_Out & B00000100));
+	digitalWrite(LED_E_Y, !(FSM[ST].ST_Out & B00000010));
+	digitalWrite(LED_E_G, !(FSM[ST].ST_Out & B00000001));
 
-	digitalWrite(LED_W_R, FSM[ST].ST_Out & B10000000);
-	digitalWrite(LED_W_G, FSM[ST].ST_Out & B01000000);
+	digitalWrite(LED_W_R, !(FSM[ST].ST_Out & B10000000));
+	digitalWrite(LED_W_G, !(FSM[ST].ST_Out & B01000000));
 
 	delay(FSM[ST].Time);
 
