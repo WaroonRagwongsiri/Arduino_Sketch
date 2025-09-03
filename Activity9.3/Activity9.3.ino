@@ -24,6 +24,10 @@
 #define black 5
 #define green 6
 #define walk_end 7
+#define goN_1 8
+#define waitN_1 9
+#define goE_1 10
+#define waitE_1 11
 
 typedef struct	s_fsm
 {
@@ -52,16 +56,20 @@ void	setup()
 	pinMode(LED_W_G, OUTPUT);
 }
 
-const t_fsm	FSM[8] = {
-	// W:RG N:RYG E:RYG
+const t_fsm	FSM[12] = {
+	// W:RG N:RYG E:RYG	000	001	010	011	100	101	110	111
 	{B10001100, 5000, {goN, waitN, goN, waitN, waitN, waitN, waitN, waitN}}, // goN
 	{B10010100, 1000, {goE, goE, goE, goE, walk, walk, walk, walk}}, // waitN
 	{B10100001, 5000, {goE, goE, waitE, waitE, waitE, waitE, waitE, waitE}}, // goE
 	{B10100010, 1000, {goN, goN, goN, goN, walk, walk, walk, walk}}, // waitE
-	{B01100100, 5000, {black, black, black, black, walk, walk, walk, walk}}, // walk
+	{B01100100, 5000, {black, black, black, black, walk, black, black, black}}, // walk
 	{B00100100, 1000, {walk_end, walk_end, walk_end, walk_end, walk_end, walk_end, walk_end, walk_end}}, // black
 	{B01100100, 1000, {walk_end, walk_end, walk_end, walk_end, walk_end, walk_end, walk_end, walk_end}}, // green
-	{B10100100, 1000, {waitE, waitN, waitE, waitN, waitE, waitN, waitE, waitN}} // walk_end
+	{B10100100, 1000, {goN_1, goE_1, goN_1, goE_1, goN_1, goE_1, goN_1, goE_1}}, // walk_end
+	{B10001100, 5000, {goN, waitN, goN, waitN_1, waitN_1, waitN_1, waitN_1, waitN_1}}, // goN_1
+	{B10010100, 1000, {goE, goE, goE, goE, walk, walk, walk, walk}}, // waitN_1
+	{B10100001, 5000, {goE, goE, waitE_1, waitE_1, waitE_1, waitE_1, waitE_1, waitE_1}}, // goE_1
+	{B10100010, 1000, {goN, goN, goN, goN, walk, walk, walk, goN_1}}, // waitE_1
 };
 
 static int	input = 0;
@@ -70,7 +78,7 @@ static int	input_e = 0;
 static int	input_w = 0;
 
 static int	counter = 0;
-static int	ST = goN;
+static int	ST = walk;
 
 void	loop()
 {
