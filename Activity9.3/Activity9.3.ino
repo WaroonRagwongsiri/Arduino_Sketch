@@ -58,7 +58,8 @@ void	setup()
 
 const t_fsm	FSM[12] = {
 	// W:RG N:RYG E:RYG	000	001	010	011	100	101	110	111
-	{B10001100, 5000, {goN, waitN, goN, waitN, waitN, waitN, waitN, waitN}}, // goN
+	{B10001100, 5000, {goN, waitN, goN, waitN, waitN
+	, waitN, waitN, waitN}}, // goN
 	{B10010100, 1000, {goE, goE, goE, goE, walk, walk, walk, walk}}, // waitN
 	{B10100001, 5000, {goE, goE, waitE, waitE, waitE, waitE, waitE, waitE}}, // goE
 	{B10100010, 1000, {goN, goN, goN, goN, walk, walk, walk, walk}}, // waitE
@@ -78,7 +79,7 @@ static int	input_e = 0;
 static int	input_w = 0;
 
 static int	counter = 0;
-static int	ST = walk;
+static int	ST = goN;
 
 void	loop()
 {
@@ -109,9 +110,9 @@ void	loop()
 			counter = 0;
 
 			// Input State
-			input_n = digitalRead(N_BUTTON);
-			input_e = digitalRead(E_BUTTON);
-			input_w = digitalRead(W_BUTTON);
+			input_n = !(digitalRead(N_BUTTON));
+			input_e = !(digitalRead(E_BUTTON));
+			input_w = !(digitalRead(W_BUTTON));
 			input = input_w * 4 + input_n * 2 + input_e;
 			
 			ST = FSM[ST].NextST[input];
@@ -122,9 +123,9 @@ void	loop()
 		counter = 0;
 
 		// Input State
-		input_n = digitalRead(N_BUTTON);
-		input_e = digitalRead(E_BUTTON);
-		input_w = digitalRead(W_BUTTON);
+		input_n = !(digitalRead(N_BUTTON));
+		input_e = !(digitalRead(E_BUTTON));
+		input_w = !(digitalRead(W_BUTTON));
 		input = input_w * 4 + input_n * 2 + input_e;
 		
 		ST = FSM[ST].NextST[input];
