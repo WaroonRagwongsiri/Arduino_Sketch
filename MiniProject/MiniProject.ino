@@ -45,29 +45,29 @@ static int	board[6][7] = {
 	{0,0,0,0,0,0,0,},
 };
 
-t_fsm	FSM[15] = {
-	{0, 1, 5000, {col0_p1, col0_p2, col1_p2, col2_p2, col3_p2, col4_p2, col5_p2, col6_p2, }}, 	//col0_p1
-	{1, 1, 5000, {col1_p1, col0_p2, col1_p2, col2_p2, col3_p2, col4_p2, col5_p2, col6_p2, }},	//col1_p1
-	{2, 1, 5000, {col2_p1, col0_p2, col1_p2, col2_p2, col3_p2, col4_p2, col5_p2, col6_p2, }},	//col2_p1
-	{3, 1, 5000, {col3_p1, col0_p2, col1_p2, col2_p2, col3_p2, col4_p2, col5_p2, col6_p2, }},	//col3_p1
-	{4, 1, 5000, {col4_p1, col0_p2, col1_p2, col2_p2, col3_p2, col4_p2, col5_p2, col6_p2, }},	//col4_p1
-	{5, 1, 5000, {col5_p1, col0_p2, col1_p2, col2_p2, col3_p2, col4_p2, col5_p2, col6_p2, }},	//col5_p1
-	{6, 1, 5000, {col6_p1, col0_p2, col1_p2, col2_p2, col3_p2, col4_p2, col5_p2, col6_p2, }},	//col6_p1
+t_fsm	FSM[14] = {
+	{0, 1, 1500, {col0_p1, col0_p2, col1_p2, col2_p2, col3_p2, col4_p2, col5_p2, col6_p2, }}, 	// col0_p1
+	{1, 1, 1500, {col1_p1, col0_p2, col1_p2, col2_p2, col3_p2, col4_p2, col5_p2, col6_p2, }},	// col1_p1
+	{2, 1, 1500, {col2_p1, col0_p2, col1_p2, col2_p2, col3_p2, col4_p2, col5_p2, col6_p2, }},	// col2_p1
+	{3, 1, 1500, {col3_p1, col0_p2, col1_p2, col2_p2, col3_p2, col4_p2, col5_p2, col6_p2, }},	// col3_p1
+	{4, 1, 1500, {col4_p1, col0_p2, col1_p2, col2_p2, col3_p2, col4_p2, col5_p2, col6_p2, }},	// col4_p1
+	{5, 1, 1500, {col5_p1, col0_p2, col1_p2, col2_p2, col3_p2, col4_p2, col5_p2, col6_p2, }},	// col5_p1
+	{6, 1, 1500, {col6_p1, col0_p2, col1_p2, col2_p2, col3_p2, col4_p2, col5_p2, col6_p2, }},	// col6_p1
 
-	{7, 2, 5000, {col0_p2, col0_p1, col1_p1, col2_p1, col3_p1, col4_p1, col5_p1, col6_p1, }}, 	//col0_p2
-	{8, 2, 5000, {col1_p2, col0_p1, col1_p1, col2_p1, col3_p1, col4_p1, col5_p1, col6_p1, }}, 	//col1_p2
-	{9, 2, 5000, {col2_p2, col0_p1, col1_p1, col2_p1, col3_p1, col4_p1, col5_p1, col6_p1, }}, 	//col2_p2
-	{10, 2, 5000, {col3_p2, col0_p1, col1_p1, col2_p1, col3_p1, col4_p1, col5_p1, col6_p1, }}, 	//col3_p2
-	{11, 2, 5000, {col4_p2, col0_p1, col1_p1, col2_p1, col3_p1, col4_p1, col5_p1, col6_p1, }}, 	//col4_p2
-	{12, 2, 5000, {col5_p2, col0_p1, col1_p1, col2_p1, col3_p1, col4_p1, col5_p1, col6_p1, }}, 	//col5_p2
-	{13, 2, 5000, {col6_p2, col0_p1, col1_p1, col2_p1, col3_p1, col4_p1, col5_p1, col6_p1, }}, 	//col6_p2
+	{0, 2, 1500, {col0_p2, col0_p1, col1_p1, col2_p1, col3_p1, col4_p1, col5_p1, col6_p1, }}, 	// col0_p2
+	{1, 2, 1500, {col1_p2, col0_p1, col1_p1, col2_p1, col3_p1, col4_p1, col5_p1, col6_p1, }}, 	// col1_p2
+	{2, 2, 1500, {col2_p2, col0_p1, col1_p1, col2_p1, col3_p1, col4_p1, col5_p1, col6_p1, }}, 	// col2_p2
+	{3, 2, 1500, {col3_p2, col0_p1, col1_p1, col2_p1, col3_p1, col4_p1, col5_p1, col6_p1, }}, 	// col3_p2
+	{4, 2, 1500, {col4_p2, col0_p1, col1_p1, col2_p1, col3_p1, col4_p1, col5_p1, col6_p1, }}, 	// col4_p2
+	{5, 2, 1500, {col5_p2, col0_p1, col1_p1, col2_p1, col3_p1, col4_p1, col5_p1, col6_p1, }}, 	// col5_p2
+	{6, 2, 1500, {col6_p2, col0_p1, col1_p1, col2_p1, col3_p1, col4_p1, col5_p1, col6_p1, }}, 	// col6_p2
 };
 
-static int	ST = 0;
+static int	ST = col0_p2;
+static int	last_ST = col0_p2;
+static int	winner = 0;
 
-static int	last_ST = 0;
-
-void	setup()
+void	setup(void)
 {
 	// Setup Button
 	pinMode(BUTTON_0, INPUT_PULLUP);
@@ -82,19 +82,33 @@ void	setup()
 	pinMode(OUT_1, OUTPUT);
 	pinMode(OUT_2, OUTPUT);
 	pinMode(OUT_3, OUTPUT);
+
+	// Serial Display
 	Serial.begin(9600);
+	display_board_serial();
 }
 
-void	loop()
+void	loop(void)
 {
 	int	input;
 
+	// Handle no state change
 	if (last_ST != ST)
 	{
 		put_coin(FSM[ST].col, FSM[ST].player);
+		display_board_serial();
+		winner = check_win();
 		last_ST = ST;
 	}
-	display_board_serial();
+	// Handle win
+	if (winner)
+	{
+		Serial.print("Winner is Player: ");
+		Serial.println(winner);
+		winner = 0;
+		set_zero_board();
+		display_board_serial();
+	}
 	delay(FSM[ST].time);
 
 	// Input State
@@ -102,7 +116,7 @@ void	loop()
 	ST = FSM[ST].next_st[input];
 }
 
-int	get_input()
+int	get_input(void)
 {
 	int	input0;
 	int	input1;
@@ -171,4 +185,131 @@ void	display_board_serial(void)
 		Serial.println();
 	}
 	Serial.println();
+}
+
+int	check_win(void)
+{
+	int	row;
+	int	col;
+	int	player;
+
+	row = 5;
+	player = 1;
+	while (row >= 0)
+	{
+		col = 6;
+		while (col >= 0)
+		{
+			if (board[row][col])
+			{
+				player = board[row][col];
+				if (check_win_up(row, col, player) || check_win_left(row, col, player)
+					|| check_win_right(row, col, player) || check_win_up_left(row, col, player)
+					|| check_win_up_right(row, col, player))
+					return (player);
+			}
+			--col;
+		}
+		--row;
+	}
+	return (0);
+}
+
+int	check_win_up(int row, int col, int player)
+{
+	int	i;
+
+	if (row < 3)
+		return (0);
+	i = 0;
+	while (i < 4)
+	{
+		if (board[row - i][col] != player)
+			return (0);
+		++i;
+	}
+	return (player);
+}
+
+int	check_win_left(int row, int col, int player)
+{
+	int	i;
+
+	if (col < 3)
+		return (0);
+	i = 0;
+	while (i < 4)
+	{
+		if (board[row][col - i] != player)
+			return (0);
+		++i;
+	}
+	return (player);
+}
+int	check_win_right(int row, int col, int player)
+{
+	int	i;
+
+	if (col > 3)
+		return (0);
+	i = 0;
+	while (i < 4)
+	{
+		if (board[row][col + i] != player)
+			return (0);
+		++i;
+	}
+	return (player);
+}
+
+int	check_win_up_left(int row, int col, int player)
+{
+	int	i;
+
+	if (row < 3 || col < 3)
+		return (0);
+	i = 0;
+	while (i < 4)
+	{
+		if (board[row - i][col - i] != player)
+			return (0);
+		++i;
+	}
+	return (player);
+}
+
+int	check_win_up_right(int row, int col, int player)
+{
+	int	i;
+
+	if (row < 3 || col > 3)
+		return (0);
+	i = 0;
+	while (i < 4)
+	{
+		if (board[row - i][col + i] != player)
+			return (0);
+		++i;
+	}
+	return (player);
+}
+
+void	set_zero_board(void)
+{
+	int	row;
+	int	col;
+
+	row = 0;
+	while (row < 6)
+	{
+		col = 0;
+		while (col < 7)
+		{
+			board[row][col] = 0;
+			++col;
+		}
+		++row;
+	}
+	ST = col0_p2;
+	last_ST = col0_p2;
 }
