@@ -8,9 +8,7 @@
 #define BUTTON_6 7
 
 // Define Out
-#define OUT_1 4
-#define OUT_2 3
-#define OUT_3 2
+#define TX_OUT 1
 
 // Define State
 #define col0_p1 0
@@ -77,11 +75,6 @@ void	setup(void)
 	pinMode(BUTTON_4, INPUT_PULLUP);
 	pinMode(BUTTON_5, INPUT_PULLUP);
 	pinMode(BUTTON_6, INPUT_PULLUP);
-
-	// Setup Out
-	pinMode(OUT_1, OUTPUT);
-	pinMode(OUT_2, OUTPUT);
-	pinMode(OUT_3, OUTPUT);
 
 	// Serial Display
 	Serial.begin(9600);
