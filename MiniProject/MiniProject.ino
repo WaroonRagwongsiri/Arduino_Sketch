@@ -1,3 +1,12 @@
+// Include Serial
+#include <SoftwareSerial.h>
+
+// Define Out
+#define TX_OUT 4
+#define RX_IN 3
+
+const SoftwareSerial	mySerial(RX_IN, TX_OUT);
+
 // Define Input Button
 #define BUTTON_0 13
 #define BUTTON_1 12
@@ -6,9 +15,6 @@
 #define BUTTON_4 9
 #define BUTTON_5 8
 #define BUTTON_6 7
-
-// Define Out
-#define TX_OUT 1
 
 // Define State
 #define col0_p1 0
@@ -78,11 +84,13 @@ void	setup(void)
 
 	// Serial Display
 	Serial.begin(9600);
+	mySerial.begin(2400);
 	display_board_serial();
 }
 
 void	loop(void)
 {
+	String	msg;
 	int	input;
 
 	// Handle no state change
@@ -99,6 +107,10 @@ void	loop(void)
 		Serial.print("Winner is Player: ");
 		Serial.println(winner);
 		winner = 0;
+		msg = "Winner is Player: ";
+		msg += (String) winner;
+		mySerial.println(msg);
+		delay(1000);
 		set_zero_board();
 		display_board_serial();
 	}
@@ -165,18 +177,26 @@ void	put_coin(int col, int player)
 
 void	display_board_serial(void)
 {
-	Serial.println("Board Array:");
+	String	msg;
 
+	msg = "";
+	Serial.println("Board Array:");
 	for (int row = 0; row < 6; row++)
 	{
 		for (int col = 0; col < 7; col++)
 		{
 			Serial.print(board[row][col]);
+			msg += (String) (board[row][col]);
 			if (col < 6)
+			{
 				Serial.print(",");
+				msg += ", ";
+			}
 		}
+		msg += "\n";
 		Serial.println();
 	}
+	mySerial.print(msg);
 	Serial.println();
 }
 
