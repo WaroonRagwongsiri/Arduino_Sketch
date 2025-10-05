@@ -1,0 +1,20 @@
+When start set the time to 00:00
+
+When press start do the loop for pomodoro clock
+	Study -> rest -> Study -> rest -> ...
+	if press start again pause the time
+	if press end end this pomodoro session
+	if press config do nothing
+	if press mode do nothing
+
+When press end do nothing
+
+When press config
+	show the Study time
+	if press start increase the time
+	if press end decrease the time
+	if press config again then confirm the time
+	if press mode change from Study -> rest time, rest -> Study timee
+
+When press mode
+	change mode accordingly
