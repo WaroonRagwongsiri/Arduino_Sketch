@@ -1,0 +1,3 @@
+[submodule "ICE-MiniProject"]
+	path = ICE-MiniProject
+	url = git@github.com:WaroonRagwongsiri/ICE-MiniProject.git
