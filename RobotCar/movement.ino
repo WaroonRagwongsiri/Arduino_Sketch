@@ -1,80 +1,114 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   movement.ino                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/29 17:17:28 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/09/30 12:11:07 by waroonwork@      ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "RobotCar.h"
 
-
-// Set left and right motor to low;
-void	set_zero(void)
+// Walk 1 block
+void	move_one_block(int speed)
 {
-	digitalWrite(INA, LOW);
-	digitalWrite(INB, LOW);
-	digitalWrite(INC, LOW);
-	digitalWrite(IND, LOW);
-	analogWrite(ENA, 0);
-	analogWrite(ENB, 0);
-}
+	t_ir	ir;
 
-// Move forward for a X second;
-void	move_forward(int speed, int time_ms)
-{
-	int	l_speed;
-	int	r_speed;
-
-	l_speed = speed * LEFT_CALIBRATE;
-	r_speed = speed * RIGHT_CALIBRATE;
-	analogWrite(ENA, speed);
-	analogWrite(ENB, speed);
-	digitalWrite(INA, HIGH);
-	digitalWrite(INB, LOW);
-	digitalWrite(INC, HIGH);
-	digitalWrite(IND, LOW);
-	delay(time_ms);
+	// Walk until it white
+	read_ir(&ir);
+	while (!isWhite(ir.ir_ll) || !isWhite(ir.ir_rr))
+	{
+		read_ir(&ir);
+		line_following(speed, ir);
+	}
+	set_zero();
+	// Walk until it black
+	read_ir(&ir);
+	while (isWhite(ir.ir_ll) && isWhite(ir.ir_rr))
+	{
+		read_ir(&ir);
+		line_following(speed, ir);
+	}
+	set_zero();
+	// Allign head
+	read_ir(&ir);
+	while ( !isWhite(ir.ir_ll) && !isWhite(ir.ir_rr))
+	{	
+		read_ir(&ir);
+		if (isWhite(ir.ir_ll) && !isWhite(ir.ir_rr))
+			shift_right(speed);
+		else if (!isWhite(ir.ir_ll) && isWhite(ir.ir_rr))
+			shift_left(speed);
+		else
+			forward(speed);
+	}
 	set_zero();
 }
 
-
-// Turn Left
-void	turn_left(int speed, int time_ms)
+// Tries to allign on black line
+void	line_following(int speed, t_ir ir)
 {
-	int	l_speed;
-	int	r_speed;
+	if (!isWhite(ir.ir_lm) && !isWhite(ir.ir_rm))
+		forward(speed);
+	else if (isWhite(ir.ir_lm) && !isWhite(ir.ir_rm))
+		shift_right(speed);
+	else if (!isWhite(ir.ir_lm) && isWhite(ir.ir_rm))
+		shift_left(speed);
+	else
+		forward(speed);
+}
 
-	l_speed = speed * LEFT_CALIBRATE;
-	r_speed = speed * RIGHT_CALIBRATE;
-	analogWrite(ENA, speed);
-	analogWrite(ENB, speed);
-	digitalWrite(INA, LOW);
-	digitalWrite(INB, LOW);
-	digitalWrite(INC, HIGH);
-	digitalWrite(IND, LOW);
-	delay(time_ms);
+// Turn right
+void	turn_right(int speed)
+{
+	t_ir	ir;
+
+	// Shift until it got out of black
+	read_ir(&ir);
+	while (!isWhite(ir.ir_ll) || !isWhite(ir.ir_rr))
+	{
+		read_ir(&ir);
+		shift_right(speed);
+	}
+	// Shift until it back to blakc
+	read_ir(&ir);
+	while (isWhite(ir.ir_ll) || isWhite(ir.ir_rr))
+	{
+		read_ir(&ir);
+		shift_right(speed);
+	}
+	// Allign head
+	read_ir(&ir);
+	while (!isWhite(ir.ir_ll) && !isWhite(ir.ir_rr))
+	{
+		read_ir(&ir);
+		if (isWhite(ir.ir_ll) && !isWhite(ir.ir_rr))
+			shift_right(speed);
+		else if (!isWhite(ir.ir_ll) && isWhite(ir.ir_rr))
+			shift_left(speed);
+	}
 	set_zero();
 }
 
-// Turn Right
-void	turn_right(int speed, int time_ms)
+// Turn left
+void	turn_left(int speed)
 {
-	int	l_speed;
-	int	r_speed;
+	t_ir	ir;
 
-	l_speed = speed * LEFT_CALIBRATE;
-	r_speed = speed * RIGHT_CALIBRATE;
-	analogWrite(ENA, speed);
-	analogWrite(ENB, speed);
-	digitalWrite(INA, HIGH);
-	digitalWrite(INB, LOW);
-	digitalWrite(INC, LOW);
-	digitalWrite(IND, LOW);
-	delay(time_ms);
+	// Shift until it got out of black
+	read_ir(&ir);
+	while (!isWhite(ir.ir_ll) || !isWhite(ir.ir_rr))
+	{
+		read_ir(&ir);
+		shift_left(speed);
+	}
+	// Shift until it back to blakc
+	read_ir(&ir);
+	while (isWhite(ir.ir_ll) || isWhite(ir.ir_rr))
+	{
+		read_ir(&ir);
+		shift_left(speed);
+	}
+	// Allign head
+	read_ir(&ir);
+	while (!isWhite(ir.ir_ll) && !isWhite(ir.ir_rr))
+	{
+		read_ir(&ir);
+		if (isWhite(ir.ir_ll) && !isWhite(ir.ir_rr))
+			shift_right(speed);
+		else if (!isWhite(ir.ir_ll) && isWhite(ir.ir_rr))
+			shift_left(speed);
+	}
 	set_zero();
 }
