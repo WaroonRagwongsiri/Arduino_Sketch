@@ -24,19 +24,17 @@ void	setup(void)
 
 void	loop(void)
 {
-	start_to_check();
-	check_to_start();
+	move_one_block(100);
+	turn_right(100);
+	turn_left(100);
+	turn_right(100);
+	move_one_block(100);
 }
 
 void	start_to_check(void)
 {
-	while (cur_col != 5 && cur_row != 0)
-	{
-
-	}
 }
 
 void	check_to_start(void)
 {
-	
 }
