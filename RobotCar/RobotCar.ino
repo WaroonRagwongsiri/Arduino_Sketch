@@ -26,23 +26,18 @@ void	setup(void)
 	Serial.begin(9600);
 	digitalWrite(BUZZER, HIGH);
 	delay(1000);
-	// move_one_block(100);
-	// delay(500);
-	// turn_left(100);
-	// delay(500);
-	// turn_right(100);
-	// delay(500);
-	// move_one_block(100);
-	// delay(500);
 }
 
 void	loop(void)
 {
 	log(0);
-
-	move_one_block(130);
+	walk_direction(120, 'U');
 	delay(500);
-	turn_right(100);
+	walk_direction(120, 'R');
+	delay(500);
+	walk_direction(120, 'D');
+	delay(500);
+	walk_direction(120, 'L');
 	delay(500);
 }
 

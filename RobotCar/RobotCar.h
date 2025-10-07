@@ -54,6 +54,12 @@
 // Turn Time
 # define TURN_TIME 300
 
+// Direction
+# define DIR_UP 0
+# define DIR_DOWN 1
+# define DIR_LEFT 2
+# define DIR_RIGHT 3
+
 typedef struct s_ir
 {
 	int	up;
@@ -96,5 +102,12 @@ int		to_cm(long micro_seconds);
 // IR sensor
 void	read_ir(t_ir *ir);
 int 	isWhite(int sensor_value);
+
+// Walk Direction
+void	walk_direction(int speed, char path);
+void	walk_up(int speed, int *direction);
+void	walk_down(int speed, int *direction);
+void	walk_left(int speed, int *direction);
+void	walk_right(int speed, int *direction);
 
 #endif
