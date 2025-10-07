@@ -113,12 +113,11 @@ void turn_left(int speed)
 			line_following(speed, ir);
 		}
 		set_zero();
-		delay(100);
 	}
 
-	// Move forward using line_following for 500ms to clear the intersection
+	// Move forward using line_following for 300ms to clear the intersection
 	startTime = millis();
-	while (millis() - startTime < 500)
+	while (millis() - startTime < 300)
 	{
 		read_ir(&ir);
 		line_following(speed, ir);
@@ -139,12 +138,12 @@ void turn_left(int speed)
 	while (isWhite(ir.lm) && isWhite(ir.rm))
 	{
 		read_ir(&ir);
-		pivot_left(speed);
+		pivot_left(speed * 0.8);
 	}
 	set_zero();
 
 	// Align on black
-	align_on_line(speed);
+	align_on_line(speed * 0.8);
 	set_zero();
 }
 
@@ -166,12 +165,11 @@ void turn_right(int speed)
 			line_following(speed, ir);
 		}
 		set_zero();
-		delay(100);
 	}
 
-	// Move forward using line_following for 500ms to clear the intersection
+	// Move forward using line_following for 300ms to clear the intersection
 	startTime = millis();
-	while (millis() - startTime < 500)
+	while (millis() - startTime < 300)
 	{
 		read_ir(&ir);
 		line_following(speed, ir);
@@ -192,11 +190,11 @@ void turn_right(int speed)
 	while (isWhite(ir.lm) && isWhite(ir.rm))
 	{
 		read_ir(&ir);
-		pivot_right(speed);
+		pivot_right(speed * 0.8);
 	}
 	set_zero();
 
 	// Align on black
-	align_on_line(speed);
+	align_on_line(speed * 0.8);
 	set_zero();
 }

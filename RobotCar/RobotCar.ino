@@ -29,8 +29,10 @@ void	setup(void)
 	move_one_block(100);
 	delay(500);
 	turn_left(100);
-	delay(500);
+	// delay(500);
 	// turn_right(100);
+	// delay(500);
+	// move_one_block(100);
 	// delay(500);
 }
 
