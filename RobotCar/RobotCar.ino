@@ -25,12 +25,15 @@ void	setup(void)
 	pinMode(ECHO_PIN, INPUT);
 	Serial.begin(9600);
 	digitalWrite(BUZZER, HIGH);
+	delay(1000);
+	move_one_block(130);
+	// turn_left(130);
 }
 
 void	loop(void)
 {
-	// log(0);
-	move_one_block(150);
+	log(0);
+	// move_one_block(150);
 	// turn_right(100);
 	// turn_left(100);
 	// turn_right(100);
