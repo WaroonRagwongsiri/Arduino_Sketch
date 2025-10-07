@@ -46,10 +46,13 @@
 # define BLOCK 4
 
 # define LEFT_CALIBRATE 1
-# define RIGHT_CALIBRATE 1.5
+# define RIGHT_CALIBRATE 1
 
 // Color
 # define WHITE_THRESHOLD 400
+
+// Turn Time
+# define TURN_TIME 300
 
 typedef struct s_ir
 {

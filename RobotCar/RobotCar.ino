@@ -40,7 +40,7 @@ void	loop(void)
 {
 	log(0);
 
-	move_one_block(100);
+	move_one_block(130);
 	delay(500);
 	turn_right(100);
 	delay(500);
