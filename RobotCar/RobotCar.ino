@@ -42,7 +42,7 @@ void	loop(void)
 
 	move_one_block(100);
 	delay(500);
-	turn_left(100);
+	turn_right(100);
 	delay(500);
 }
 

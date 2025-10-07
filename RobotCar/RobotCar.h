@@ -84,6 +84,7 @@ void	turn_left(int speed);
 void	align_on_line(int speed);
 void	walk_back_til_black(int speed);
 void	line_following_backward(int speed, t_ir ir);
+void	turn_around(int speed);
 
 // Ultrasonic
 long	read_ultrasonic(void);

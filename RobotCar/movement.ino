@@ -115,14 +115,14 @@ void turn_left(int speed)
 		set_zero();
 	}
 
-	// // Move forward using line_following for 300ms to clear the intersection
-	// startTime = millis();
-	// while (millis() - startTime < 300)
-	// {
-	// 	read_ir(&ir);
-	// 	line_following(speed, ir);
-	// }
-	// set_zero();
+	// Move forward using line_following for 150ms to clear the intersection
+	startTime = millis();
+	while (millis() - startTime < 150)
+	{
+		read_ir(&ir);
+		line_following(speed, ir);
+	}
+	set_zero();
 
 	// Pivot until it leaves black (both middle sensors on white)
 	read_ir(&ir);
@@ -167,14 +167,14 @@ void turn_right(int speed)
 		set_zero();
 	}
 
-	// // Move forward using line_following for 300ms to clear the intersection
-	// startTime = millis();
-	// while (millis() - startTime < 300)
-	// {
-	// 	read_ir(&ir);
-	// 	line_following(speed, ir);
-	// }
-	// set_zero();
+	// Move forward using line_following for 300ms to clear the intersection
+	startTime = millis();
+	while (millis() - startTime < 150)
+	{
+		read_ir(&ir);
+		line_following(speed, ir);
+	}
+	set_zero();
 
 	// Pivot until it leaves black (both middle sensors on white)
 	read_ir(&ir);
@@ -224,4 +224,62 @@ void	line_following_backward(int speed, t_ir ir)
 		shift_left_backward(speed);
 	else
 		backward(speed);
+}
+
+// Turn 180 degree
+void	turn_around(int speed)
+{
+	t_ir			ir;
+	unsigned long	startTime;
+	int				i;
+
+	// If starting on intersection, move forward first
+	read_ir(&ir);
+	if (!isWhite(ir.ll) && !isWhite(ir.rr))
+	{
+		read_ir(&ir);
+		line_following(speed, ir);
+		while (!isWhite(ir.ll) || !isWhite(ir.rr))
+		{
+			read_ir(&ir);
+			line_following(speed, ir);
+		}
+		set_zero();
+	}
+
+	// // Use line_following for 150ms to clear intersection while staying on line
+	// startTime = millis();
+	// while (millis() - startTime < 150)
+	// {
+	// 	read_ir(&ir);
+	// 	line_following(speed, ir);
+	// }
+	// set_zero();
+
+	i = 0;
+	while (i > 2)
+	{
+		// Pivot until it leaves black (both middle sensors on white)
+		read_ir(&ir);
+		while (!isWhite(ir.lm) || !isWhite(ir.rm))
+		{
+			read_ir(&ir);
+			pivot_left(speed);
+		}
+		set_zero();
+
+		// Pivot until it finds the perpendicular black line
+		read_ir(&ir);
+		while (isWhite(ir.lm) && isWhite(ir.rm))
+		{
+			read_ir(&ir);
+			pivot_left(speed * 0.8);
+		}
+		set_zero();
+
+		// Align on black
+		align_on_line(speed * 0.8);
+		set_zero();
+	}
+	set_zero();
 }
