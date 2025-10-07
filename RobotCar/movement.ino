@@ -265,21 +265,30 @@ void	turn_around(int speed)
 		set_zero();
 	}
 
-	// // Use line_following for 300ms to clear intersection while staying on line
-	// startTime = millis();
-	// while (millis() - startTime < 300)
-	// {
-	// 	read_ir(&ir);
-	// 	line_following(speed, ir);
-	// }
-	// set_zero();
+	// Use line_following for 300ms to clear intersection while staying on line
+	startTime = millis();
+	while (millis() - startTime < 300)
+	{
+		read_ir(&ir);
+		line_following(speed, ir);
+	}
+	set_zero();
 
 	i = 0;
-	while (i > 2)
+	while (i < 2)
 	{
 		// Pivot until it leaves black (both middle sensors on white)
 		read_ir(&ir);
 		while (!isWhite(ir.lm) || !isWhite(ir.rm))
+		{
+			read_ir(&ir);
+			pivot_left(speed);
+		}
+		set_zero();
+
+		// Turn left a little
+		startTime = millis();
+		while (millis() - startTime < TURN_TIME)
 		{
 			read_ir(&ir);
 			pivot_left(speed);
@@ -298,6 +307,7 @@ void	turn_around(int speed)
 		// Align on black
 		align_on_line(speed * 0.8);
 		set_zero();
+		i++;
 	}
 	set_zero();
 }

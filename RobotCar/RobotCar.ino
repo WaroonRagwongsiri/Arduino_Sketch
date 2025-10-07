@@ -31,12 +31,12 @@ void	setup(void)
 void	loop(void)
 {
 	log(0);
-	walk_direction(120, 'U');
-	delay(500);
+	// walk_direction(120, 'U');
+	// delay(500);
 	walk_direction(120, 'R');
 	delay(500);
-	walk_direction(120, 'D');
-	delay(500);
+	// walk_direction(120, 'D');
+	// delay(500);
 	walk_direction(120, 'L');
 	delay(500);
 }
