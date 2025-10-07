@@ -2,11 +2,11 @@
 
 void	read_ir(t_ir *ir)
 {
-    ir->ir_up = analogRead(IR_UP);
-    ir->ir_ll = analogRead(IR_LL);
-    ir->ir_lm = analogRead(IR_LM);
-    ir->ir_rm = analogRead(IR_RM);
-    ir->ir_rr = analogRead(IR_RR);
+    ir->up = analogRead(IR_UP);
+    ir->ll = analogRead(IR_LL);
+    ir->lm = analogRead(IR_LM);
+    ir->rm = analogRead(IR_RM);
+    ir->rr = analogRead(IR_RR);
 }
 
 int	isWhite(int sensor_value)

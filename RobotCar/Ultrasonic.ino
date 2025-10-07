@@ -2,13 +2,11 @@
 
 long	read_ultrasonic(void)
 {
-	pinMode(TRIGGER_PIN, OUTPUT);
 	digitalWrite(TRIGGER_PIN, LOW);
 	delayMicroseconds(2);
 	digitalWrite(TRIGGER_PIN, HIGH);
 	delayMicroseconds(10);
 	digitalWrite(TRIGGER_PIN, LOW);
-	pinMode(ECHO_PIN, INPUT);
 	return (pulseIn(ECHO_PIN, HIGH));
 }
 

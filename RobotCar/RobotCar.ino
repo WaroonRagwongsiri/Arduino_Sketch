@@ -20,15 +20,21 @@ static int	cur_col = 0;
 void	setup(void)
 {
 	setup_motor();
+	pinMode(BUZZER, OUTPUT);
+	pinMode(TRIGGER_PIN, OUTPUT);
+	pinMode(ECHO_PIN, INPUT);
+	Serial.begin(9600);
+	digitalWrite(BUZZER, HIGH);
 }
 
 void	loop(void)
 {
-	move_one_block(100);
-	turn_right(100);
-	turn_left(100);
-	turn_right(100);
-	move_one_block(100);
+	// log(0);
+	move_one_block(150);
+	// turn_right(100);
+	// turn_left(100);
+	// turn_right(100);
+	// move_one_block(100);
 }
 
 void	start_to_check(void)

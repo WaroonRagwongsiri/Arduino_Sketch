@@ -7,7 +7,7 @@ void	move_one_block(int speed)
 
 	// Walk until it white
 	read_ir(&ir);
-	while (!isWhite(ir.ir_ll) || !isWhite(ir.ir_rr))
+	while (!isWhite(ir.ll) || !isWhite(ir.rr))
 	{
 		read_ir(&ir);
 		line_following(speed, ir);
@@ -15,7 +15,7 @@ void	move_one_block(int speed)
 	set_zero();
 	// Walk until it black
 	read_ir(&ir);
-	while (isWhite(ir.ir_ll) && isWhite(ir.ir_rr))
+	while (isWhite(ir.ll) && isWhite(ir.rr))
 	{
 		read_ir(&ir);
 		line_following(speed, ir);
@@ -23,12 +23,12 @@ void	move_one_block(int speed)
 	set_zero();
 	// Allign head
 	read_ir(&ir);
-	while ( !isWhite(ir.ir_ll) && !isWhite(ir.ir_rr))
+	while ( !isWhite(ir.ll) && !isWhite(ir.rr))
 	{	
 		read_ir(&ir);
-		if (isWhite(ir.ir_ll) && !isWhite(ir.ir_rr))
+		if (isWhite(ir.ll) && !isWhite(ir.rr))
 			shift_right(speed);
-		else if (!isWhite(ir.ir_ll) && isWhite(ir.ir_rr))
+		else if (!isWhite(ir.ll) && isWhite(ir.rr))
 			shift_left(speed);
 		else
 			forward(speed);
@@ -39,11 +39,11 @@ void	move_one_block(int speed)
 // Tries to allign on black line
 void	line_following(int speed, t_ir ir)
 {
-	if (!isWhite(ir.ir_lm) && !isWhite(ir.ir_rm))
+	if (!isWhite(ir.lm) && !isWhite(ir.rm))
 		forward(speed);
-	else if (isWhite(ir.ir_lm) && !isWhite(ir.ir_rm))
+	else if (isWhite(ir.lm) && !isWhite(ir.rm))
 		shift_right(speed);
-	else if (!isWhite(ir.ir_lm) && isWhite(ir.ir_rm))
+	else if (!isWhite(ir.lm) && isWhite(ir.rm))
 		shift_left(speed);
 	else
 		forward(speed);
@@ -56,26 +56,26 @@ void	turn_right(int speed)
 
 	// Shift until it got out of black
 	read_ir(&ir);
-	while (!isWhite(ir.ir_ll) || !isWhite(ir.ir_rr))
+	while (!isWhite(ir.ll) || !isWhite(ir.rr))
 	{
 		read_ir(&ir);
 		shift_right(speed);
 	}
 	// Shift until it back to blakc
 	read_ir(&ir);
-	while (isWhite(ir.ir_ll) || isWhite(ir.ir_rr))
+	while (isWhite(ir.ll) || isWhite(ir.rr))
 	{
 		read_ir(&ir);
 		shift_right(speed);
 	}
 	// Allign head
 	read_ir(&ir);
-	while (!isWhite(ir.ir_ll) && !isWhite(ir.ir_rr))
+	while (!isWhite(ir.ll) && !isWhite(ir.rr))
 	{
 		read_ir(&ir);
-		if (isWhite(ir.ir_ll) && !isWhite(ir.ir_rr))
+		if (isWhite(ir.ll) && !isWhite(ir.rr))
 			shift_right(speed);
-		else if (!isWhite(ir.ir_ll) && isWhite(ir.ir_rr))
+		else if (!isWhite(ir.ll) && isWhite(ir.rr))
 			shift_left(speed);
 	}
 	set_zero();
@@ -88,26 +88,26 @@ void	turn_left(int speed)
 
 	// Shift until it got out of black
 	read_ir(&ir);
-	while (!isWhite(ir.ir_ll) || !isWhite(ir.ir_rr))
+	while (!isWhite(ir.ll) || !isWhite(ir.rr))
 	{
 		read_ir(&ir);
 		shift_left(speed);
 	}
 	// Shift until it back to blakc
 	read_ir(&ir);
-	while (isWhite(ir.ir_ll) || isWhite(ir.ir_rr))
+	while (isWhite(ir.ll) || isWhite(ir.rr))
 	{
 		read_ir(&ir);
 		shift_left(speed);
 	}
 	// Allign head
 	read_ir(&ir);
-	while (!isWhite(ir.ir_ll) && !isWhite(ir.ir_rr))
+	while (!isWhite(ir.ll) && !isWhite(ir.rr))
 	{
 		read_ir(&ir);
-		if (isWhite(ir.ir_ll) && !isWhite(ir.ir_rr))
+		if (isWhite(ir.ll) && !isWhite(ir.rr))
 			shift_right(speed);
-		else if (!isWhite(ir.ir_ll) && isWhite(ir.ir_rr))
+		else if (!isWhite(ir.ll) && isWhite(ir.rr))
 			shift_left(speed);
 	}
 	set_zero();

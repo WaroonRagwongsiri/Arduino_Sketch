@@ -14,31 +14,28 @@
 # define ROBOT_CAR
 
 // PWM Motor A (Left Motor)
-# define ENA 10
-# define INA 9
-# define INB 8
+# define ENA 13
+# define INA 12
+# define INB 11
 
 // PWM Motor B (Right Motor)
-# define ENB 6
-# define INC 5
-# define IND 4
-
-# define LEFT_CALIBRATE 1
-# define RIGHT_CALIBRATE 1
+# define ENB 10
+# define INC 9
+# define IND 8
 
 // Ultrasonic
-# define TRIGGER_PIN 12
-# define ECHO_PIN 11
+# define TRIGGER_PIN 7
+# define ECHO_PIN 6
+
+// Buzzer
+# define BUZZER 5
 
 // IR
-# define IR_LL A0
-# define IR_LM A1
-# define IR_RR A2
-# define IR_RM A3
-# define IR_UP A4
-
-// Piezo (buzzer)
-# define PIEZO 13
+# define IR_LL A5
+# define IR_LM A4
+# define IR_UP A3
+# define IR_RM A2
+# define IR_RR A1
 
 // Board
 # define BOARD_SIZE 6
@@ -48,17 +45,24 @@
 # define OBSTA 3
 # define BLOCK 4
 
+# define LEFT_CALIBRATE 1
+# define RIGHT_CALIBRATE 1
+
 // Color
-# define WHITE_THRESHOLD 100
+# define WHITE_THRESHOLD 400
 
 typedef struct s_ir
 {
-	int	ir_up;
-	int	ir_ll;
-	int	ir_lm;
-	int	ir_rm;
-	int	ir_rr;
+	int	up;
+	int	ll;
+	int	lm;
+	int	rm;
+	int	rr;
 } t_ir;
+
+// Log
+void	log(int buz);
+void	beep_buzzer(int buz);
 
 // Motor
 void	setup_motor(void);
