@@ -26,9 +26,9 @@ void	setup(void)
 	Serial.begin(9600);
 	digitalWrite(BUZZER, HIGH);
 	delay(1000);
-	move_one_block(100);
-	delay(500);
-	turn_left(100);
+	// move_one_block(100);
+	// delay(500);
+	// turn_left(100);
 	// delay(500);
 	// turn_right(100);
 	// delay(500);
@@ -40,10 +40,10 @@ void	loop(void)
 {
 	log(0);
 
-	// forward(130);
-	// delay(1000);
-	// set_zero();
-	// delay(1000);
+	move_one_block(100);
+	delay(500);
+	turn_left(100);
+	delay(500);
 }
 
 void	start_to_check(void)

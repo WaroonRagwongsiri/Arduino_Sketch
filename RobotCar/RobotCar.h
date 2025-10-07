@@ -72,6 +72,9 @@ void	shift_right(int speed);
 void	shift_left(int speed);
 void	pivot_right(int speed);
 void	pivot_left(int speed);
+void	backward(int speed);
+void	shift_right_backward(int speed);
+void	shift_left_backward(int speed);
 
 // Movement
 void	move_one_block(int speed);
@@ -79,6 +82,8 @@ void	line_following(int speed, t_ir ir);
 void	turn_right(int speed);
 void	turn_left(int speed);
 void	align_on_line(int speed);
+void	walk_back_til_black(int speed);
+void	line_following_backward(int speed, t_ir ir);
 
 // Ultrasonic
 long	read_ultrasonic(void);
