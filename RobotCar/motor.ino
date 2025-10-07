@@ -57,3 +57,25 @@ void	shift_left(int speed)
 	digitalWrite(INC, HIGH);
 	digitalWrite(IND, LOW);
 }
+
+// Proper pivot right (for turns)
+void	pivot_right(int speed)
+{
+	analogWrite(ENA, speed * LEFT_CALIBRATE);
+	analogWrite(ENB, speed * RIGHT_CALIBRATE);
+	digitalWrite(INA, HIGH);   // Left forward
+	digitalWrite(INB, LOW);
+	digitalWrite(INC, LOW);    // Right backward
+	digitalWrite(IND, HIGH);
+}
+
+// Proper pivot left (for turns)
+void	pivot_left(int speed)
+{
+	analogWrite(ENA, speed * LEFT_CALIBRATE);
+	analogWrite(ENB, speed * RIGHT_CALIBRATE);
+	digitalWrite(INA, LOW);    // Left backward
+	digitalWrite(INB, HIGH);
+	digitalWrite(INC, HIGH);   // Right forward
+	digitalWrite(IND, LOW);
+}

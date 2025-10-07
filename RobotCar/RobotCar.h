@@ -14,14 +14,14 @@
 # define ROBOT_CAR
 
 // PWM Motor A (Left Motor)
-# define ENA 13
-# define INA 12
+# define ENA 9
+# define INA 8
 # define INB 11
 
 // PWM Motor B (Right Motor)
 # define ENB 10
-# define INC 9
-# define IND 8
+# define INC 12
+# define IND 13
 
 // Ultrasonic
 # define TRIGGER_PIN 7
@@ -69,12 +69,16 @@ void	setup_motor(void);
 void	set_zero(void);
 void	forward(int speed);
 void	shift_right(int speed);
+void	shift_left(int speed);
+void	pivot_right(int speed);
+void	pivot_left(int speed);
 
 // Movement
 void	move_one_block(int speed);
 void	line_following(int speed, t_ir ir);
 void	turn_right(int speed);
 void	turn_left(int speed);
+void	align_on_line(int speed);
 
 // Ultrasonic
 long	read_ultrasonic(void);
