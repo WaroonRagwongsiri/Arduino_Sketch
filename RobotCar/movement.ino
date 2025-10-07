@@ -1,11 +1,26 @@
 #include "RobotCar.h"
 
 // Walk 1 block
-void	move_one_block(int speed)
+void move_one_block(int speed)
 {
 	t_ir	ir;
 
-	// Walk until it white
+	// Check if we're starting on an intersection
+	read_ir(&ir);
+	if (!isWhite(ir.ll) && !isWhite(ir.rr))
+	{
+		// We're on intersection, move forward until we leave it
+		read_ir(&ir);
+		forward(speed);
+		while (!isWhite(ir.ll) || !isWhite(ir.rr))
+		{
+			read_ir(&ir);
+			forward(speed);
+		}
+		set_zero();
+	}
+	// Continue with your original loic...
+	// Walk until it white (should already be true from above)
 	read_ir(&ir);
 	while (!isWhite(ir.ll) || !isWhite(ir.rr))
 	{
@@ -13,7 +28,8 @@ void	move_one_block(int speed)
 		line_following(speed, ir);
 	}
 	set_zero();
-	// Walk until it black
+	
+	// Walk until it black  
 	read_ir(&ir);
 	while (isWhite(ir.ll) && isWhite(ir.rr))
 	{
@@ -21,9 +37,10 @@ void	move_one_block(int speed)
 		line_following(speed, ir);
 	}
 	set_zero();
-	// Allign head
+	
+	// Align head
 	read_ir(&ir);
-	while ( !isWhite(ir.ll) && !isWhite(ir.rr))
+	while (!isWhite(ir.ll) && !isWhite(ir.rr))
 	{	
 		read_ir(&ir);
 		if (isWhite(ir.ll) && !isWhite(ir.rr))

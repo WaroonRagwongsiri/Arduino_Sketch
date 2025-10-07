@@ -46,7 +46,7 @@
 # define BLOCK 4
 
 # define LEFT_CALIBRATE 1
-# define RIGHT_CALIBRATE 1
+# define RIGHT_CALIBRATE 1.5
 
 // Color
 # define WHITE_THRESHOLD 400
