@@ -49,7 +49,7 @@
 # define RIGHT_CALIBRATE 1
 
 // Color
-# define WHITE_THRESHOLD 400
+# define WHITE_THRESHOLD 500
 
 // Direction
 # define DIR_UP 0
@@ -59,11 +59,11 @@
 
 # define LIMIT_PATH 100
 
-# define NORMAL_SPEED 150
+# define NORMAL_SPEED 130
 
 // Turn Time
 # define TURN_WALK 300
-# define TURN_TIME 200
+# define TURN_TIME 300
 
 typedef struct s_ir
 {

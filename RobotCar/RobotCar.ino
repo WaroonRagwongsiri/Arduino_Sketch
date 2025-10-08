@@ -35,9 +35,9 @@ void	setup(void)
 	digitalWrite(BUZZER, HIGH);
 	beep_buzzer();
 	// delay(500);
-	// start_to_checkpoint(NORMAL_SPEED);
+	start_to_checkpoint(NORMAL_SPEED);
 	// delay(500);
-	// beep_buzzer();
+	beep_buzzer();
 	// delay(500);
 	// beep_buzzer();
 	// delay(500);
@@ -46,36 +46,19 @@ void	setup(void)
 	// beep_buzzer();
 	// delay(500);
 	// beep_buzzer();
-	turn_left(NORMAL_SPEED);
-	beep_buzzer();
 }
 
 void	loop(void)
 {
 	log(0, board);
 	// walk(NORMAL_SPEED, 'U', &direction, board, &cur_row, &cur_col);
-	// beep_buzzer();
 	// delay(500);
 	// walk(NORMAL_SPEED, 'R', &direction, board, &cur_row, &cur_col);
-	// beep_buzzer();
-	// delay(500);
-	// walk(NORMAL_SPEED, 'U', &direction, board, &cur_row, &cur_col);
-	// beep_buzzer();
-	// delay(500);
-	// walk(NORMAL_SPEED, 'R', &direction, board, &cur_row, &cur_col);
-	// beep_buzzer();
 	// delay(500);
 	// walk(NORMAL_SPEED, 'D', &direction, board, &cur_row, &cur_col);
-	// beep_buzzer();
 	// delay(500);
 	// walk(NORMAL_SPEED, 'L', &direction, board, &cur_row, &cur_col);
-	// beep_buzzer();
 	// delay(500);
-	// walk(NORMAL_SPEED, 'D', &direction, board, &cur_row, &cur_col);
-	// beep_buzzer();
-	// delay(500);
-	// walk(NORMAL_SPEED, 'L', &direction, board, &cur_row, &cur_col);
-	// beep_buzzer();
 	// delay(500);
 }
 
