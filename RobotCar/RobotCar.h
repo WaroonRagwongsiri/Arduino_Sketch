@@ -60,6 +60,8 @@
 # define DIR_LEFT 2
 # define DIR_RIGHT 3
 
+# define LIMIT_PATH 100
+
 typedef struct s_ir
 {
 	int	up;
@@ -113,5 +115,9 @@ void	face_right(int speed, int *direction);
 
 // Map
 void	update_map(int board[BOARD_SIZE][BOARD_SIZE], int block_distance, int *direction, int cur_row, int cur_col);
+int		walk(int speed, char path, int *direction, int board[BOARD_SIZE][BOARD_SIZE], int *cur_row, int *cur_col);
+
+int		solve(char path_to_end[LIMIT_PATH], int start_row, int start_col, int end_row, int end_col);
+int		solve_helper(char path[LIMIT_PATH], int row, int col, int end_row, int end_col, int visited[BOARD_SIZE][BOARD_SIZE], int depth);
 
 #endif

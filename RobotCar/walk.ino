@@ -63,3 +63,39 @@ void	face_right(int speed, int *direction)
 		turn_left(speed);
 	*direction = DIR_RIGHT;
 }
+
+// If walkable in the direction walk then update cur_row and cur_col then return 1
+int	walk(int speed, char path, int *direction, int board[BOARD_SIZE][BOARD_SIZE], int *cur_row, int *cur_col)
+{
+	int target_row = *cur_row;
+	int target_col = *cur_col;
+	
+	face_direction(speed, path, direction);
+	update_map(board, read_ultrasonic(), direction, *cur_row, *cur_col);
+	
+	// Calculate target position based on direction
+	if (path == 'U')
+		target_row = *cur_row - 1;
+	else if (path == 'D')
+		target_row = *cur_row + 1;
+	else if (path == 'L')
+		target_col = *cur_col - 1;
+	else if (path == 'R')
+		target_col = *cur_col + 1;
+	
+	// Check if target position is within bounds and walkable
+	if (target_row >= 0 && target_row < BOARD_SIZE && 
+		target_col >= 0 && target_col < BOARD_SIZE &&
+		(board[target_row][target_col] == SPACE || board[target_row][target_col] == UNK))
+	{
+		// Move the car - update current position
+		board[*cur_row][*cur_col] = SPACE; // Clear old position
+		*cur_row = target_row;
+		*cur_col = target_col;
+		board[*cur_row][*cur_col] = CAR; // Mark new position
+		move_one_block(speed);
+		return (1);
+	}
+	else
+		return (0);
+}
