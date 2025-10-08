@@ -24,19 +24,18 @@ void	log(int buz, int board[BOARD_SIZE][BOARD_SIZE])
 	Serial.println("");
 	Serial.println("========== Board ==========");
 	print_board(board);
-	delay(1000);
-	beep_buzzer(buz);
+	if (buz)
+		beep_buzzer();
 }
 
-void	beep_buzzer(int buz)
+void	beep_buzzer(void)
 {
-	if (buz)
-	{
-		digitalWrite(BUZZER, LOW);
-		delay(200);
-		digitalWrite(BUZZER, HIGH);
-		delay(200);
-	}
+	Serial.println("========== Board ==========");
+	digitalWrite(BUZZER, LOW);
+	Serial.println("Beep");
+	delay(200);
+	digitalWrite(BUZZER, HIGH);
+	delay(200);
 }
 
 void	print_board(int board[BOARD_SIZE][BOARD_SIZE])

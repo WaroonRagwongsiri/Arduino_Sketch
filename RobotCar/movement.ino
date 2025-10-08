@@ -20,7 +20,6 @@ void	move_one_block(int speed)
 		set_zero();
 	}
 	// Walk until it white (should already be true from above)
-
 	read_ir(&ir);
 	while (!isWhite(ir.ll) || !isWhite(ir.rr))
 	{
@@ -89,7 +88,7 @@ void	align_on_line(int speed)
 		else
 		{
 			// Both sensors same state - move forward slowly
-			forward(speed);
+			line_following(speed, ir);
 		}
 	}
 	set_zero();
@@ -114,17 +113,16 @@ void turn_left(int speed)
 		}
 		set_zero();
 	}
-
-	// Move forward using line_following for 300ms to clear the intersection
+	// Move a little
 	startTime = millis();
-	while (millis() - startTime < 300)
+	while (millis() - startTime < TURN_WALK)
 	{
 		read_ir(&ir);
 		line_following(speed, ir);
 	}
-	set_zero();
+	// set_zero();
 
-	// Turn left a little
+	// // Turn left a little
 	startTime = millis();
 	while (millis() - startTime < TURN_TIME)
 	{
@@ -147,20 +145,20 @@ void turn_left(int speed)
 	while (isWhite(ir.lm) && isWhite(ir.rm))
 	{
 		read_ir(&ir);
-		pivot_left(speed * 0.8);
+		pivot_left(speed);
 	}
 	set_zero();
 
-	// Align on black
-	align_on_line(speed * 0.8);
+	// // Align on black
+	// align_on_line(speed);
 	set_zero();
 }
 
 // Turn right 90 degree
 void turn_right(int speed)
 {
-	t_ir			ir;
-	unsigned long	startTime;
+	t_ir				ir;
+	unsigned long		startTime;
 		
 	// If starting on intersection, use line_following to move forward first
 	read_ir(&ir);
@@ -175,10 +173,9 @@ void turn_right(int speed)
 		}
 		set_zero();
 	}
-
-	// Move forward using line_following for 300ms to clear the intersection
+	// Move a little
 	startTime = millis();
-	while (millis() - startTime < 300)
+	while (millis() - startTime < TURN_WALK)
 	{
 		read_ir(&ir);
 		line_following(speed, ir);
@@ -208,12 +205,12 @@ void turn_right(int speed)
 	while (isWhite(ir.lm) && isWhite(ir.rm))
 	{
 		read_ir(&ir);
-		pivot_right(speed * 0.8);
+		pivot_right(speed);
 	}
 	set_zero();
 
-	// Align on black
-	align_on_line(speed * 0.8);
+	// // Align on black
+	// align_on_line(speed);
 	set_zero();
 }
 
@@ -249,8 +246,7 @@ void	turn_around(int speed)
 {
 	t_ir			ir;
 	unsigned long	startTime;
-	int				i;
-
+		
 	// If starting on intersection, move forward first
 	read_ir(&ir);
 	if (!isWhite(ir.ll) && !isWhite(ir.rr))
@@ -265,49 +261,16 @@ void	turn_around(int speed)
 		set_zero();
 	}
 
-	// Use line_following for 300ms to clear intersection while staying on line
+	// Move a little
 	startTime = millis();
-	while (millis() - startTime < 300)
+	while (millis() - startTime < TURN_WALK)
 	{
 		read_ir(&ir);
 		line_following(speed, ir);
 	}
 	set_zero();
 
-	i = 0;
-	while (i < 2)
-	{
-		// Pivot until it leaves black (both middle sensors on white)
-		read_ir(&ir);
-		while (!isWhite(ir.lm) || !isWhite(ir.rm))
-		{
-			read_ir(&ir);
-			pivot_left(speed);
-		}
-		set_zero();
-
-		// Turn left a little
-		startTime = millis();
-		while (millis() - startTime < TURN_TIME)
-		{
-			read_ir(&ir);
-			pivot_left(speed);
-		}
-		set_zero();
-
-		// Pivot until it finds the perpendicular black line
-		read_ir(&ir);
-		while (isWhite(ir.lm) && isWhite(ir.rm))
-		{
-			read_ir(&ir);
-			pivot_left(speed * 0.8);
-		}
-		set_zero();
-
-		// Align on black
-		align_on_line(speed * 0.8);
-		set_zero();
-		i++;
-	}
-	set_zero();
+	// Simply call turn_left twice with proper backward alignment
+	turn_left(speed);
+	turn_left(speed);
 }

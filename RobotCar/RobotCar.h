@@ -28,7 +28,7 @@
 # define ECHO_PIN 5
 
 // Buzzer
-# define BUZZER 3
+# define BUZZER 4
 
 // IR
 # define IR_LL A5
@@ -51,10 +51,6 @@
 // Color
 # define WHITE_THRESHOLD 400
 
-// Turn Time
-# define TURN_WALK 300
-# define TURN_TIME 150
-
 // Direction
 # define DIR_UP 0
 # define DIR_DOWN 1
@@ -63,7 +59,11 @@
 
 # define LIMIT_PATH 100
 
-# define NORMAL_SPEED 130
+# define NORMAL_SPEED 150
+
+// Turn Time
+# define TURN_WALK 300
+# define TURN_TIME 200
 
 typedef struct s_ir
 {
@@ -76,7 +76,7 @@ typedef struct s_ir
 
 // Log
 void	log(int buz, int board[BOARD_SIZE][BOARD_SIZE]);
-void	beep_buzzer(int buz);
+void	beep_buzzer(void);
 void	print_board(int board[BOARD_SIZE][BOARD_SIZE]);
 
 // Motor

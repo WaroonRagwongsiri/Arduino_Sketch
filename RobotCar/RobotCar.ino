@@ -33,19 +33,48 @@ void	setup(void)
 	pinMode(BUZZER, OUTPUT);
 	Serial.begin(9600);
 	digitalWrite(BUZZER, HIGH);
-	delay(1000);
-	// start_to_checkpoint(NORMAL_SPEED);
-	// beep_buzzer(1);
-	// beep_buzzer(1);
-	// checkpoint_to_start(NORMAL_SPEED);
-	// beep_buzzer(1);
-	// beep_buzzer(1);
-	turn_left(NORMAL_SPEED);
+	beep_buzzer();
 	delay(500);
+	start_to_checkpoint(NORMAL_SPEED);
+	delay(500);
+	beep_buzzer();
+	delay(500);
+	beep_buzzer();
+	delay(500);
+	checkpoint_to_start(NORMAL_SPEED);
+	delay(500);
+	beep_buzzer();
+	delay(500);
+	beep_buzzer();
 }
 
 void	loop(void)
 {
+	log(0, board);
+	// walk(NORMAL_SPEED, 'U', &direction, board, &cur_row, &cur_col);
+	// beep_buzzer(1);
+	// delay(500);
+	// walk(NORMAL_SPEED, 'R', &direction, board, &cur_row, &cur_col);
+	// beep_buzzer(1);
+	// delay(500);
+	// walk(NORMAL_SPEED, 'U', &direction, board, &cur_row, &cur_col);
+	// beep_buzzer(1);
+	// delay(500);
+	// walk(NORMAL_SPEED, 'R', &direction, board, &cur_row, &cur_col);
+	// beep_buzzer(1);
+	// delay(500);
+	// walk(NORMAL_SPEED, 'D', &direction, board, &cur_row, &cur_col);
+	// beep_buzzer(1);
+	// delay(500);
+	// walk(NORMAL_SPEED, 'L', &direction, board, &cur_row, &cur_col);
+	// beep_buzzer(1);
+	// delay(500);
+	// walk(NORMAL_SPEED, 'D', &direction, board, &cur_row, &cur_col);
+	// beep_buzzer(1);
+	// delay(500);
+	// walk(NORMAL_SPEED, 'L', &direction, board, &cur_row, &cur_col);
+	// beep_buzzer(1);
+	delay(500);
 }
 
 void	start_to_checkpoint(int speed)
