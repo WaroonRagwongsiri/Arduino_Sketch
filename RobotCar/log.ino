@@ -1,6 +1,6 @@
 #include "RobotCar.h"
 
-void	log(int buz)
+void	log(int buz, int board[BOARD_SIZE][BOARD_SIZE])
 {
 	t_ir	ir;
 
@@ -22,6 +22,8 @@ void	log(int buz)
 	Serial.print("RR : ");
 	Serial.println(ir.rr);
 	Serial.println("");
+	Serial.println("========== Board ==========");
+	print_board(board);
 	delay(1000);
 	beep_buzzer(buz);
 }
@@ -34,5 +36,26 @@ void	beep_buzzer(int buz)
 		delay(200);
 		digitalWrite(BUZZER, HIGH);
 		delay(200);
+	}
+}
+
+void	print_board(int board[BOARD_SIZE][BOARD_SIZE])
+{
+	int	row;
+	int	col;
+
+	row = 0;
+	while (row < BOARD_SIZE)
+	{
+		col = 0;
+		while (col < BOARD_SIZE)
+		{
+			Serial.print(board[row][col]);
+			if (col < 5)
+				Serial.print(", ");
+			col++;
+		}
+		Serial.println("");
+		row++;
 	}
 }

@@ -70,8 +70,9 @@ typedef struct s_ir
 } t_ir;
 
 // Log
-void	log(int buz);
+void	log(int buz, int board[BOARD_SIZE][BOARD_SIZE]);
 void	beep_buzzer(int buz);
+void	print_board(int board[BOARD_SIZE][BOARD_SIZE]);
 
 // Motor
 void	setup_motor(void);
@@ -104,10 +105,13 @@ void	read_ir(t_ir *ir);
 int 	isWhite(int sensor_value);
 
 // Walk Direction
-void	face_direction(int speed, char path);
+void	face_direction(int speed, char path, int *direction);
 void	face_up(int speed, int *direction);
 void	face_down(int speed, int *direction);
 void	face_left(int speed, int *direction);
 void	face_right(int speed, int *direction);
+
+// Map
+void	update_map(int board[BOARD_SIZE][BOARD_SIZE], int block_distance, int *direction, int cur_row, int cur_col);
 
 #endif

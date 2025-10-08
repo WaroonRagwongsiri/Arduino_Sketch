@@ -14,6 +14,8 @@ static int	board[BOARD_SIZE][BOARD_SIZE] = {
 	{CAR, 0, 0, 0, 0, 0},
 };
 
+static int	direction = DIR_UP;
+
 static int	cur_row = 5;
 static int	cur_col = 0;
 
@@ -28,7 +30,10 @@ void	setup(void)
 
 void	loop(void)
 {
-	log(0);
+	update_map(board, read_ultrasonic(), &direction, cur_row, cur_col);
+	log(0, board);
+	move_one_block(120);
+	delay(3000);
 }
 
 void	start_to_check(void)

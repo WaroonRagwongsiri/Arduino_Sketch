@@ -1,16 +1,15 @@
 #include "RobotCar.h"
 
-void	face_direction(int speed, char path)
+void	face_direction(int speed, char path, int *direction)
 {
-	static int	direction = DIR_UP;
 	if (path == 'U')
-		face_up(speed, &direction);
+		face_up(speed, direction);
 	else if (path == 'D')
-		face_down(speed, &direction);
+		face_down(speed, direction);
 	else if (path == 'L')
-		face_left(speed, &direction);
+		face_left(speed, direction);
 	else if (path == 'R')
-		face_right(speed, &direction);
+		face_right(speed, direction);
 }
 
 void	face_up(int speed, int *direction)
