@@ -1,5 +1,5 @@
-#define TRIGGER_PIN 10
-#define ECHO_PIN 9
+#define TRIGGER_PIN 7
+#define ECHO_PIN 6
 
 void setup(void)
 {

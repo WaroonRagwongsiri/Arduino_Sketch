@@ -2,12 +2,15 @@
 
 long	read_ultrasonic(void)
 {
+
+	pinMode(TRIGGER_PIN, OUTPUT);
 	digitalWrite(TRIGGER_PIN, LOW);
 	delayMicroseconds(2);
 	digitalWrite(TRIGGER_PIN, HIGH);
 	delayMicroseconds(10);
 	digitalWrite(TRIGGER_PIN, LOW);
-	return (pulseIn(ECHO_PIN, HIGH));
+	pinMode(ECHO_PIN, INPUT);
+	return (to_cm(pulseIn(ECHO_PIN, HIGH)));
 }
 
 // Speed of sound is 340 m/s or 29.4 microseconds / cm

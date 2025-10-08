@@ -21,8 +21,6 @@ void	setup(void)
 {
 	setup_motor();
 	pinMode(BUZZER, OUTPUT);
-	pinMode(TRIGGER_PIN, OUTPUT);
-	pinMode(ECHO_PIN, INPUT);
 	Serial.begin(9600);
 	digitalWrite(BUZZER, HIGH);
 	delay(1000);
@@ -31,14 +29,6 @@ void	setup(void)
 void	loop(void)
 {
 	log(0);
-	// walk_direction(120, 'U');
-	// delay(500);
-	walk_direction(120, 'R');
-	delay(500);
-	// walk_direction(120, 'D');
-	// delay(500);
-	walk_direction(120, 'L');
-	delay(500);
 }
 
 void	start_to_check(void)

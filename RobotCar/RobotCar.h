@@ -24,11 +24,11 @@
 # define IND 13
 
 // Ultrasonic
-# define TRIGGER_PIN 7
-# define ECHO_PIN 6
+# define TRIGGER_PIN 6
+# define ECHO_PIN 5
 
 // Buzzer
-# define BUZZER 5
+# define BUZZER 3
 
 // IR
 # define IR_LL A5
@@ -104,10 +104,10 @@ void	read_ir(t_ir *ir);
 int 	isWhite(int sensor_value);
 
 // Walk Direction
-void	walk_direction(int speed, char path);
-void	walk_up(int speed, int *direction);
-void	walk_down(int speed, int *direction);
-void	walk_left(int speed, int *direction);
-void	walk_right(int speed, int *direction);
+void	face_direction(int speed, char path);
+void	face_up(int speed, int *direction);
+void	face_down(int speed, int *direction);
+void	face_left(int speed, int *direction);
+void	face_right(int speed, int *direction);
 
 #endif

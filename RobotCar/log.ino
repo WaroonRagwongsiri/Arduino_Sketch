@@ -7,7 +7,7 @@ void	log(int buz)
 	digitalWrite(BUZZER, HIGH);
 	Serial.println("========== Ultrasonic ==========");
 	Serial.print("Ultrasonic : ");
-	Serial.println(to_cm(read_ultrasonic()));
+	Serial.println(read_ultrasonic());
 	Serial.println("");
 	read_ir(&ir);
 	Serial.println("========== IR ==========");
