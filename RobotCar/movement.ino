@@ -53,7 +53,7 @@ void	move_one_block(int speed)
 }
 
 // Tries to allign on black line
-void	line_following(int speed, t_ir ir)
+void	line_following(int speed, t_ir	ir)
 {
 	if (!isWhite(ir.lm) && !isWhite(ir.rm))
 		forward(speed);
@@ -65,7 +65,7 @@ void	line_following(int speed, t_ir ir)
 		forward(speed);
 }
 
-// Align robot centered on the black line
+// Align
 void	align_on_line(int speed)
 {
 	t_ir	ir;
@@ -94,44 +94,27 @@ void	align_on_line(int speed)
 	set_zero();
 }
 
-// Turn left 90 degree
-void turn_left(int speed)
+// Turn left 90 degree - SENSOR-ONLY VERSION
+void	turn_left(int speed)
 {
-	t_ir				ir;
-	unsigned long		startTime;
+	t_ir	ir;
+	unsigned long startTime;
 		
-	// If starting on intersection, use line_following to move forward first
+	// If starting on intersection, move forward first
 	read_ir(&ir);
 	if (!isWhite(ir.ll) && !isWhite(ir.rr))
 	{
-		read_ir(&ir);
-		line_following(speed, ir);
-		while (!isWhite(ir.ll) || !isWhite(ir.rr))
+		startTime = millis();
+		while (millis() - startTime < TURN_WALK)
 		{
 			read_ir(&ir);
 			line_following(speed, ir);
 		}
 		set_zero();
+		delay(100);
 	}
-	// Move a little
-	startTime = millis();
-	while (millis() - startTime < TURN_WALK)
-	{
-		read_ir(&ir);
-		line_following(speed, ir);
-	}
-	// set_zero();
 
-	// // Turn left a little
-	startTime = millis();
-	while (millis() - startTime < TURN_TIME)
-	{
-		read_ir(&ir);
-		pivot_left(speed);
-	}
-	set_zero();
-
-	// Pivot until it leaves black (both middle sensors on white)
+	// Pivot black -> white
 	read_ir(&ir);
 	while (!isWhite(ir.lm) || !isWhite(ir.rm))
 	{
@@ -140,77 +123,57 @@ void turn_left(int speed)
 	}
 	set_zero();
 
-	// Pivot until it finds the perpendicular black line
+	// Pivot white -> left
 	read_ir(&ir);
-	while (isWhite(ir.lm) && isWhite(ir.rm))
+	while (isWhite(ir.lm) || isWhite(ir.rm))
 	{
 		read_ir(&ir);
 		pivot_left(speed);
 	}
-	set_zero();
 
-	// // Align on black
-	// align_on_line(speed);
+	// Align back to intersect
+	align_backward(speed);
 	set_zero();
 }
 
-// Turn right 90 degree
-void turn_right(int speed)
+// Turn right 90 degree - SENSOR-ONLY VERSION
+void	turn_right(int speed)
 {
-	t_ir				ir;
-	unsigned long		startTime;
+	t_ir	ir;
+	unsigned long startTime;
 		
-	// If starting on intersection, use line_following to move forward first
+	// If starting on intersection, move forward first
 	read_ir(&ir);
 	if (!isWhite(ir.ll) && !isWhite(ir.rr))
 	{
-		read_ir(&ir);
-		line_following(speed, ir);
-		while (!isWhite(ir.ll) || !isWhite(ir.rr))
+		startTime = millis();
+		while (millis() - startTime < TURN_WALK)
 		{
 			read_ir(&ir);
 			line_following(speed, ir);
 		}
 		set_zero();
+		delay(100);
 	}
-	// Move a little
-	startTime = millis();
-	while (millis() - startTime < TURN_WALK)
-	{
-		read_ir(&ir);
-		line_following(speed, ir);
-	}
-	set_zero();
 
-	// Turn right a little
-	startTime = millis();
-	while (millis() - startTime < TURN_TIME)
-	{
-		read_ir(&ir);
-		pivot_right(speed);
-	}
-	set_zero();
-
-	// Pivot until it leaves black (both middle sensors on white)
+	// Pivot black -> white
 	read_ir(&ir);
 	while (!isWhite(ir.lm) || !isWhite(ir.rm))
 	{
 		read_ir(&ir);
 		pivot_right(speed);
 	}
-	set_zero();
 
-	// Pivot until it finds the perpendicular black line
+	// Pivot white -> black
 	read_ir(&ir);
-	while (isWhite(ir.lm) && isWhite(ir.rm))
+	while (isWhite(ir.lm) || isWhite(ir.rm))
 	{
 		read_ir(&ir);
 		pivot_right(speed);
 	}
-	set_zero();
-
-	// // Align on black
-	// align_on_line(speed);
+		
+	// Align back to intersect
+	align_backward(speed);
 	set_zero();
 }
 
@@ -241,36 +204,25 @@ void	line_following_backward(int speed, t_ir ir)
 		backward(speed);
 }
 
-// Turn 180 degree
+// Turn around 180 degree - SENSOR-ONLY VERSION
 void	turn_around(int speed)
 {
-	t_ir			ir;
-	unsigned long	startTime;
-		
-	// If starting on intersection, move forward first
-	read_ir(&ir);
-	if (!isWhite(ir.ll) && !isWhite(ir.rr))
-	{
-		read_ir(&ir);
-		line_following(speed, ir);
-		while (!isWhite(ir.ll) || !isWhite(ir.rr))
-		{
-			read_ir(&ir);
-			line_following(speed, ir);
-		}
-		set_zero();
-	}
+	turn_left(speed);
+	delay(200); // Small pause between turns
+	turn_left(speed);
+}
 
-	// Move a little
-	startTime = millis();
-	while (millis() - startTime < TURN_WALK)
+// Align backward
+void	align_backward(int speed)
+{
+	t_ir	ir;
+
+	read_ir(&ir);
+
+	while (!isWhite(ir.ll) || !isWhite(ir.lm) || !isWhite(ir.rm) || !isWhite(ir.rr))
 	{
 		read_ir(&ir);
-		line_following(speed, ir);
+		line_following_backward(speed, ir);
 	}
 	set_zero();
-
-	// Simply call turn_left twice with proper backward alignment
-	turn_left(speed);
-	turn_left(speed);
 }
