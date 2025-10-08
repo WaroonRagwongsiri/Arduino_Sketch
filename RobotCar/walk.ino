@@ -84,18 +84,23 @@ int	walk(int speed, char path, int *direction, int board[BOARD_SIZE][BOARD_SIZE]
 		target_col = *cur_col + 1;
 	
 	// Check if target position is within bounds and walkable
-	if (target_row >= 0 && target_row < BOARD_SIZE && 
-		target_col >= 0 && target_col < BOARD_SIZE &&
-		(board[target_row][target_col] == SPACE || board[target_row][target_col] == UNK))
+	if (is_walkable(target_row, target_col, board))
 	{
 		// Move the car - update current position
-		board[*cur_row][*cur_col] = SPACE; // Clear old position
+		board[*cur_row][*cur_col] = SPACE;
 		*cur_row = target_row;
 		*cur_col = target_col;
-		board[*cur_row][*cur_col] = CAR; // Mark new position
+		board[*cur_row][*cur_col] = CAR;
 		move_one_block(speed);
 		return (1);
 	}
 	else
 		return (0);
+}
+
+int	is_walkable(int target_row, int target_col, int board[BOARD_SIZE][BOARD_SIZE])
+{
+	return (target_row >= 0 && target_row < BOARD_SIZE \
+		&& target_col >= 0 && target_col < BOARD_SIZE && \
+		(board[target_row][target_col] == SPACE));
 }
