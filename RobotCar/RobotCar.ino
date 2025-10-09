@@ -33,12 +33,9 @@ void	setup(void)
 	pinMode(BUZZER, OUTPUT);
 	Serial.begin(9600);
 	digitalWrite(BUZZER, HIGH);
-	// beep_buzzer();
-	// delay(500);
 	start_to_checkpoint(NORMAL_SPEED);
-	// delay(500);
 	checkpoint_to_start(NORMAL_SPEED);
-	// delay(500);
+	push_a_block(NORMAL_SPEED);
 }
 
 void	loop(void)
@@ -52,7 +49,6 @@ void	loop(void)
 	// walk(NORMAL_SPEED, 'D', &direction, board, &cur_row, &cur_col);
 	// delay(500);
 	// walk(NORMAL_SPEED, 'L', &direction, board, &cur_row, &cur_col);
-	// delay(500);
 	// delay(500);
 }
 
@@ -86,7 +82,9 @@ void	car_to_point(int speed, int end_row, int end_col)
 
 void	start_to_checkpoint(int speed)
 {
+	beep_buzzer();
 	car_to_point(speed, 0, BOARD_SIZE - 1);
+	delay(3000);
 	beep_buzzer();
 	beep_buzzer();
 }
@@ -94,6 +92,7 @@ void	start_to_checkpoint(int speed)
 void	checkpoint_to_start(int speed)
 {
 	car_to_point(speed, BOARD_SIZE - 1, 0);
+	beep_buzzer();
 	beep_buzzer();
 	beep_buzzer();
 }
