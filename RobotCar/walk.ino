@@ -102,5 +102,6 @@ int	is_walkable(int target_row, int target_col, int board[BOARD_SIZE][BOARD_SIZE
 {
 	return (target_row >= 0 && target_row < BOARD_SIZE \
 		&& target_col >= 0 && target_col < BOARD_SIZE && \
-		(board[target_row][target_col] == SPACE));
+		(board[target_row][target_col] == SPACE || \
+		board[target_row][target_col] == BLOCK));
 }

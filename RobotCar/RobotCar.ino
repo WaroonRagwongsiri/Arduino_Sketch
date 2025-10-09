@@ -33,24 +33,18 @@ void	setup(void)
 	pinMode(BUZZER, OUTPUT);
 	Serial.begin(9600);
 	digitalWrite(BUZZER, HIGH);
-	beep_buzzer();
+	// beep_buzzer();
 	// delay(500);
 	start_to_checkpoint(NORMAL_SPEED);
 	// delay(500);
-	beep_buzzer();
+	checkpoint_to_start(NORMAL_SPEED);
 	// delay(500);
-	// beep_buzzer();
-	// delay(500);
-	// checkpoint_to_start(NORMAL_SPEED);
-	// delay(500);
-	// beep_buzzer();
-	// delay(500);
-	// beep_buzzer();
 }
 
 void	loop(void)
 {
 	log(0, board);
+	delay(1000);
 	// walk(NORMAL_SPEED, 'U', &direction, board, &cur_row, &cur_col);
 	// delay(500);
 	// walk(NORMAL_SPEED, 'R', &direction, board, &cur_row, &cur_col);
@@ -62,25 +56,25 @@ void	loop(void)
 	// delay(500);
 }
 
-void	start_to_checkpoint(int speed)
+void	car_to_point(int speed, int end_row, int end_col)
 {
-	char	s_to_c_path[LIMIT_PATH];
+	char	walk_path[LIMIT_PATH];
 	int		i;
 
 	update_map(board, read_ultrasonic(), &direction, cur_row, cur_col);
 	log(0, board);
-	while (cur_row != 0 || cur_col != BOARD_SIZE - 1)
+	while (cur_row != end_row || cur_col != end_col)
 	{
-		memset(s_to_c_path, 0, sizeof(s_to_c_path));
-		if (solve(s_to_c_path, cur_row, cur_col, 0, BOARD_SIZE - 1))
+		memset(walk_path, 0, sizeof(walk_path));
+		if (solve(walk_path, cur_row, cur_col, end_row, end_col))
 		{
 			i = 0;
-			while (s_to_c_path[i])
+			while (walk_path[i])
 			{
 				update_map(board, read_ultrasonic(), &direction, cur_row, cur_col);
 				log(0, board);
-				Serial.println(s_to_c_path);
-				if (!walk(speed, s_to_c_path[i], &direction, board, &cur_row, &cur_col))
+				Serial.println(walk_path);
+				if (!walk(speed, walk_path[i], &direction, board, &cur_row, &cur_col))
 					break;
 				i++;
 			}
@@ -90,30 +84,25 @@ void	start_to_checkpoint(int speed)
 	}
 }
 
+void	start_to_checkpoint(int speed)
+{
+	car_to_point(speed, 0, BOARD_SIZE - 1);
+	beep_buzzer();
+	beep_buzzer();
+}
+
 void	checkpoint_to_start(int speed)
 {
-	char	c_to_s_path[LIMIT_PATH];
-	int		i;
+	car_to_point(speed, BOARD_SIZE - 1, 0);
+	beep_buzzer();
+	beep_buzzer();
+}
 
-	update_map(board, read_ultrasonic(), &direction, cur_row, cur_col);
-	log(0, board);
-	while (cur_row != BOARD_SIZE - 1 || cur_col != 0)
-	{
-		memset(c_to_s_path, 0, sizeof(c_to_s_path));
-		if (solve(c_to_s_path, cur_row, cur_col, BOARD_SIZE - 1, 0))
-		{
-			i = 0;
-			while (c_to_s_path[i])
-			{
-				update_map(board, read_ultrasonic(), &direction, cur_row, cur_col);
-				log(0, board);
-				Serial.println(c_to_s_path);
-				if (!walk(speed, c_to_s_path[i], &direction, board, &cur_row, &cur_col))
-					break;
-				i++;
-			}
-		}
-		else
-			break;
-	}
+void	push_a_block(int speed)
+{
+	cat_to_point(speed, 3, 2);
+	walk(speed, 'U', &direction, board, &cur_row, &cur_col);
+	cat_to_point(speed, 1, 1);
+	walk(speed, 'R', &direction, board, &cur_row, &cur_col);
+	walk(speed, 'R', &direction, board, &cur_row, &cur_col);
 }

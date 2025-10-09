@@ -126,6 +126,7 @@ int		solve_helper(char path[LIMIT_PATH], int row, int col, int end_row, int end_
 int		can_move(int row, int col, int visited[BOARD_SIZE][BOARD_SIZE]);
 
 // Mandatory
+void	car_to_point(int speed, int end_row, int end_col);
 void	start_to_checkpoint(int speed);
 void	checkpoint_to_start(int speed);
 
