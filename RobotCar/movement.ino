@@ -4,14 +4,14 @@
 void	move_one_block(int speed)
 {
 	t_ir	ir;
+	unsigned long startTime;
 
 	// Check if we're starting on an intersection
 	read_ir(&ir);
-	if (!isWhite(ir.ll) && !isWhite(ir.rr))
+	if (!isWhite(ir.ll) || !isWhite(ir.rr))
 	{
-		read_ir(&ir);
-		line_following(speed, ir);
-		while (!isWhite(ir.ll) || !isWhite(ir.rr))
+		startTime = millis();
+		while (millis() - startTime < WALK_TIME)
 		{
 			read_ir(&ir);
 			line_following(speed, ir);
@@ -27,7 +27,7 @@ void	move_one_block(int speed)
 		line_following(speed, ir);
 	}
 	set_zero();
-	
+
 	// Walk until it black  
 	read_ir(&ir);
 	while (isWhite(ir.ll) && isWhite(ir.rr))
@@ -36,11 +36,11 @@ void	move_one_block(int speed)
 		line_following(speed, ir);
 	}
 	set_zero();
-	
+
 	// Align head
 	read_ir(&ir);
 	while (!isWhite(ir.ll) && !isWhite(ir.rr))
-	{	
+	{
 		read_ir(&ir);
 		if (isWhite(ir.ll) && !isWhite(ir.rr))
 			shift_right(speed);

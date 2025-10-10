@@ -72,7 +72,7 @@ int	walk(int speed, char path, int *direction, int board[BOARD_SIZE][BOARD_SIZE]
 	
 	face_direction(speed, path, direction);
 	update_map(board, read_ultrasonic(), direction, *cur_row, *cur_col);
-	
+
 	// Calculate target position based on direction
 	if (path == 'U')
 		target_row = *cur_row - 1;

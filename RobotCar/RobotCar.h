@@ -64,6 +64,7 @@
 // Turn Time
 # define TURN_WALK 300
 # define TURN_TIME 300
+# define WALK_TIME 150
 
 typedef struct s_ir
 {
@@ -121,9 +122,15 @@ void	update_map(int board[BOARD_SIZE][BOARD_SIZE], int block_distance, int *dire
 int		walk(int speed, char path, int *direction, int board[BOARD_SIZE][BOARD_SIZE], int *cur_row, int *cur_col);
 int		is_walkable(int target_row, int target_col, int board[BOARD_SIZE][BOARD_SIZE]);
 
-int		solve(char path_to_end[LIMIT_PATH], int start_row, int start_col, int end_row, int end_col);
-int		solve_helper(char path[LIMIT_PATH], int row, int col, int end_row, int end_col, int visited[BOARD_SIZE][BOARD_SIZE], int depth);
-int		can_move(int row, int col, int visited[BOARD_SIZE][BOARD_SIZE]);
+typedef struct {
+	int	row;
+	int	col;
+} Node;
+
+// Solver
+int	solve(char path_to_end[LIMIT_PATH], int start_row, int start_col, \
+	int end_row, int end_col, int board[BOARD_SIZE][BOARD_SIZE]);
+int	can_move(int row, int col, int visited[BOARD_SIZE][BOARD_SIZE], int board[BOARD_SIZE][BOARD_SIZE]);
 
 // Mandatory
 void	car_to_point(int speed, int end_row, int end_col);

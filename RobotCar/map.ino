@@ -7,7 +7,9 @@ void	update_map(int board[BOARD_SIZE][BOARD_SIZE], int block_distance, int *dire
 	int	target_col = cur_col;
 	
 	// Calculate how many blocks away based on distance
-	if (block_distance >= 0 && block_distance <= 35) // ~1 block (20cm ±15)
+	if (block_distance <= 0)
+		return ;
+	if (block_distance <= 35) // ~1 block (20cm ±15)
 		blocks_away = 1;
 	else if (block_distance <= 62) // ~2 blocks (50cm ±12)
 		blocks_away = 2;

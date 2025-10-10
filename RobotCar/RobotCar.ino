@@ -32,6 +32,7 @@ void	setup(void)
 	setup_motor();
 	pinMode(BUZZER, OUTPUT);
 	Serial.begin(9600);
+	Serial.flush();
 	digitalWrite(BUZZER, HIGH);
 	start_to_checkpoint(NORMAL_SPEED);
 	checkpoint_to_start(NORMAL_SPEED);
@@ -62,16 +63,25 @@ void	car_to_point(int speed, int end_row, int end_col)
 	while (cur_row != end_row || cur_col != end_col)
 	{
 		memset(walk_path, 0, sizeof(walk_path));
-		if (solve(walk_path, cur_row, cur_col, end_row, end_col))
+		if (solve(walk_path, cur_row, cur_col, end_row, end_col, board))
 		{
 			i = 0;
 			while (walk_path[i])
 			{
-				update_map(board, read_ultrasonic(), &direction, cur_row, cur_col);
+				Serial.flush();
 				log(0, board);
+				Serial.print("Walk Path : ");
 				Serial.println(walk_path);
+				Serial.print("Path going to take : ");
+				Serial.println(walk_path[i]);
 				if (!walk(speed, walk_path[i], &direction, board, &cur_row, &cur_col))
 					break;
+				Serial.flush();
+				log(0, board);
+				Serial.print("Walk Path : ");
+				Serial.println(walk_path);
+				Serial.print("Path going to take : ");
+				Serial.println(walk_path[i]);
 				i++;
 			}
 		}
@@ -95,9 +105,9 @@ void	start_to_checkpoint(int speed)
 // Stop and beep 3 times
 void	checkpoint_to_start(int speed)
 {
-	Serial.println("Start");
+	Serial.println("Check point 2");
 	car_to_point(speed, BOARD_SIZE - 1, 0);
-	Serial.println("Start");
+	Serial.println("Start 2");
 	delay(3000);
 	beep_buzzer();
 	beep_buzzer();
