@@ -43,10 +43,10 @@ void	setup(void)
 void	loop(void)
 {
 	log(0, board);
-	car_to_point(NORMAL_SPEED, 3, 2);
-	delay(1000);
-	car_to_point(NORMAL_SPEED, 5, 0);
-	delay(1000);
+	// car_to_point(NORMAL_SPEED, 3, 2);
+	// delay(1000);
+	// car_to_point(NORMAL_SPEED, 5, 0);
+	// delay(1000);
 }
 
 void	car_to_point(int speed, int end_row, int end_col)
