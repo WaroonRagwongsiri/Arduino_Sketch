@@ -65,7 +65,7 @@ int	can_move(int row, int col, int visited[BOARD_SIZE][BOARD_SIZE], int board[BO
 {
 	if (row < 0 || row >= BOARD_SIZE || col < 0 || col >= BOARD_SIZE)
 		return (0);
-	if ((board[row][col] != SPACE && board[row][col] != BLOCK) || visited[row][col])
+	if (board[row][col] != SPACE || visited[row][col])
 		return (0);
 	return (1);
 }
