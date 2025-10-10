@@ -59,11 +59,11 @@
 
 # define LIMIT_PATH 100
 
-# define NORMAL_SPEED 130
+# define NORMAL_SPEED 140
 
 // Turn Time
-# define TURN_WALK 300
-# define TURN_TIME 300
+# define TURN_WALK 150
+# define TURN_TIME 250
 # define WALK_TIME 150
 
 typedef struct s_ir

@@ -26,11 +26,7 @@ int	solve(char path_to_end[LIMIT_PATH], int start_row, int start_col, \
 		for (int i = 0; i < 4; i++) {
 			int nr = cur.row + directions[i][0];
 			int nc = cur.col + directions[i][1];
-			if (nr < 0 || nr >= BOARD_SIZE || nc < 0 || nc >= BOARD_SIZE)
-				continue ;
-			if (visited[nr][nc])
-				continue ;
-			if (board[nr][nc] != SPACE && board[nr][nc] != BLOCK)
+			if (!can_move(nr, nc, visited, board))
 				continue ;
 			visited[nr][nc] = 1;
 			parent[nr][nc] = cur;
