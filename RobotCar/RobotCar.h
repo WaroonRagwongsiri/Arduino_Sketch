@@ -116,11 +116,12 @@ void	face_up(int speed, int *direction);
 void	face_down(int speed, int *direction);
 void	face_left(int speed, int *direction);
 void	face_right(int speed, int *direction);
+int		walk(int speed, char path, int *direction, int board[BOARD_SIZE][BOARD_SIZE], int *cur_row, int *cur_col);
+int		is_walkable(int target_row, int target_col, int board[BOARD_SIZE][BOARD_SIZE]);
+int		is_pushable(char direction, int target_row, int target_col, int board[BOARD_SIZE][BOARD_SIZE]);
 
 // Map
 void	update_map(int board[BOARD_SIZE][BOARD_SIZE], int block_distance, int *direction, int cur_row, int cur_col);
-int		walk(int speed, char path, int *direction, int board[BOARD_SIZE][BOARD_SIZE], int *cur_row, int *cur_col);
-int		is_walkable(int target_row, int target_col, int board[BOARD_SIZE][BOARD_SIZE]);
 
 typedef struct {
 	int	row;
@@ -129,7 +130,7 @@ typedef struct {
 
 // Solver
 int	solve(char path_to_end[LIMIT_PATH], int start_row, int start_col, \
-	int end_row, int end_col, int board[BOARD_SIZE][BOARD_SIZE]);
+		int end_row, int end_col, int board[BOARD_SIZE][BOARD_SIZE]);
 int	can_move(int row, int col, int visited[BOARD_SIZE][BOARD_SIZE], int board[BOARD_SIZE][BOARD_SIZE]);
 
 // Mandatory

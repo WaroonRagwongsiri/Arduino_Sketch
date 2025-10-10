@@ -1,7 +1,7 @@
 #include "RobotCar.h"
 
 int	solve(char path_to_end[LIMIT_PATH], int start_row, int start_col, \
-	int end_row, int end_col, int board[BOARD_SIZE][BOARD_SIZE])
+		int end_row, int end_col, int board[BOARD_SIZE][BOARD_SIZE])
 {
 	const int	directions[4][2] = { {-1, 0}, {0, 1}, {1, 0}, {0, -1} };
 	const char	dir_chars[4] = { 'U', 'R', 'D', 'L' };

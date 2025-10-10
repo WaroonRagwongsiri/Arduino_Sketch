@@ -5,8 +5,7 @@ void	update_map(int board[BOARD_SIZE][BOARD_SIZE], int block_distance, int *dire
 	int	blocks_away;
 	int	target_row = cur_row;
 	int	target_col = cur_col;
-	
-	// Calculate how many blocks away based on distance
+
 	if (block_distance <= 0)
 		return ;
 	if (block_distance <= 35) // ~1 block (20cm ±15)
@@ -17,10 +16,9 @@ void	update_map(int board[BOARD_SIZE][BOARD_SIZE], int block_distance, int *dire
 		blocks_away = 3;
 	else if (block_distance <= 116) // ~4 blocks (103cm ±13)
 		blocks_away = 4;
-	else // ~5 blocks (130cm+)
+	else if (block_distance <= 145) // ~5 blocks (130cm+)
 		blocks_away = 5;
-	
-	// Calculate target position based on current direction and blocks away
+
 	if (*direction == DIR_UP)
 		target_row = cur_row - blocks_away;
 	else if (*direction == DIR_RIGHT)
@@ -29,16 +27,12 @@ void	update_map(int board[BOARD_SIZE][BOARD_SIZE], int block_distance, int *dire
 		target_row = cur_row + blocks_away;
 	else if (*direction == DIR_LEFT)
 		target_col = cur_col - blocks_away;
-	
+
 	// Check if target position is within board boundaries
 	if (target_row >= 0 && target_row < BOARD_SIZE && 
 		target_col >= 0 && target_col < BOARD_SIZE)
 	{
-		// Only mark as UNK if the cell is currently SPACE (empty)
 		if (board[target_row][target_col] == SPACE)
-		{
 			board[target_row][target_col] = UNK;
-		}
-		// If it's already OBSTA or BLOCK, leave it as is
 	}
 }
