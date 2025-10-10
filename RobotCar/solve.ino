@@ -5,11 +5,12 @@ int	solve(char path_to_end[LIMIT_PATH], int start_row, int start_col, \
 {
 	const int	directions[4][2] = { {-1, 0}, {0, 1}, {1, 0}, {0, -1} };
 	const char	dir_chars[4] = { 'U', 'R', 'D', 'L' };
-	int visited[BOARD_SIZE][BOARD_SIZE] = {0};
-	Node parent[BOARD_SIZE][BOARD_SIZE];
-	char move_from_parent[BOARD_SIZE][BOARD_SIZE];
-	Node queue[BOARD_SIZE * BOARD_SIZE];
-	int front = 0, rear = 0;
+	int			visited[BOARD_SIZE][BOARD_SIZE] = {0};
+	Node		parent[BOARD_SIZE][BOARD_SIZE];
+	char		move_from_parent[BOARD_SIZE][BOARD_SIZE];
+	Node		queue[BOARD_SIZE * BOARD_SIZE];
+	int			front = 0;
+	int			rear = 0;
 
 	// Initialize BFS
 	queue[rear++] = (Node){ start_row, start_col };
@@ -45,9 +46,9 @@ int	solve(char path_to_end[LIMIT_PATH], int start_row, int start_col, \
 	}
 
 	// --- Backtrack path ---
-	Node cur = { end_row, end_col };
-	char rev_path[LIMIT_PATH];
-	int len = 0;
+	Node	cur = { end_row, end_col };
+	char	rev_path[LIMIT_PATH];
+	int		len = 0;
 
 	while (parent[cur.row][cur.col].row != -1 && len < LIMIT_PATH - 1) {
 		rev_path[len++] = move_from_parent[cur.row][cur.col];

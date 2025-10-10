@@ -37,6 +37,7 @@ void	setup(void)
 	start_to_checkpoint(NORMAL_SPEED);
 	checkpoint_to_start(NORMAL_SPEED);
 	push_a_block(NORMAL_SPEED);
+	checkpoint_to_start(NORMAL_SPEED);
 }
 
 void	loop(void)
