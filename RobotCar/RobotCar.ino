@@ -5,22 +5,22 @@
 // 2 is UNK
 // 3 is obstacle
 // 4 is block
-// static int	board[BOARD_SIZE][BOARD_SIZE] = {
-// 	{0,		0,		0,		0,		0,		0},
-// 	{0,		0,		0,		0,		0,		0},
-// 	{0,		OBSTA,	BLOCK,	0,		0,		0},
-// 	{0,		0,		0,		0,		OBSTA,	0},
-// 	{0,		0,		0,		0,		0,		0},
-// 	{CAR,	0,		0,		0,		0,		0},
-// };
 static int	board[BOARD_SIZE][BOARD_SIZE] = {
 	{0,		0,		0,		0,		0,		0},
 	{0,		0,		0,		0,		0,		0},
-	{0,		0,		0,		0,		0,		0},
-	{0,		0,		0,		0,		0,		0},
+	{0,		OBSTA,	BLOCK,	0,		0,		0},
+	{0,		0,		0,		0,		OBSTA,	0},
 	{0,		0,		0,		0,		0,		0},
 	{CAR,	0,		0,		0,		0,		0},
 };
+// static int	board[BOARD_SIZE][BOARD_SIZE] = {
+// 	{0,		0,		0,		0,		0,		0},
+// 	{0,		0,		0,		0,		0,		0},
+// 	{0,		0,		0,		0,		0,		0},
+// 	{0,		0,		0,		0,		0,		0},
+// 	{0,		0,		0,		0,		0,		0},
+// 	{CAR,	0,		0,		0,		0,		0},
+// };
 
 static int	direction = DIR_UP;
 
@@ -34,10 +34,10 @@ void	setup(void)
 	Serial.begin(9600);
 	Serial.flush();
 	digitalWrite(BUZZER, HIGH);
-	// start_to_checkpoint(NORMAL_SPEED);
-	// checkpoint_to_start(NORMAL_SPEED);
-	// push_a_block(NORMAL_SPEED);
-	// checkpoint_to_start(NORMAL_SPEED);
+	start_to_checkpoint(NORMAL_SPEED);
+	checkpoint_to_start(NORMAL_SPEED);
+	push_a_block(NORMAL_SPEED);
+	checkpoint_to_start(NORMAL_SPEED);
 }
 
 void	loop(void)
@@ -114,6 +114,7 @@ void	push_a_block(int speed)
 {
 	car_to_point(speed, 3, 2);
 	walk(speed, 'U', &direction, board, &cur_row, &cur_col);
+	walk(speed, 'D', &direction, board, &cur_row, &cur_col);
 	car_to_point(speed, 1, 1);
 	walk(speed, 'R', &direction, board, &cur_row, &cur_col);
 	walk(speed, 'R', &direction, board, &cur_row, &cur_col);

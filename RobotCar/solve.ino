@@ -22,29 +22,24 @@ int	solve(char path_to_end[LIMIT_PATH], int start_row, int start_col, \
 		Node cur = queue[front++];
 
 		if (cur.row == end_row && cur.col == end_col)
-			break;
-
+			break ;
 		for (int i = 0; i < 4; i++) {
 			int nr = cur.row + directions[i][0];
 			int nc = cur.col + directions[i][1];
-
 			if (nr < 0 || nr >= BOARD_SIZE || nc < 0 || nc >= BOARD_SIZE)
-				continue;
+				continue ;
 			if (visited[nr][nc])
-				continue;
+				continue ;
 			if (board[nr][nc] != SPACE && board[nr][nc] != BLOCK)
-				continue;
-
+				continue ;
 			visited[nr][nc] = 1;
 			parent[nr][nc] = cur;
 			move_from_parent[nr][nc] = dir_chars[i];
 			queue[rear++] = (Node){ nr, nc };
-
 			if (rear >= BOARD_SIZE * BOARD_SIZE)
-				break; // safety cap
+				break ;
 		}
 	}
-
 	// --- Backtrack path ---
 	Node	cur = { end_row, end_col };
 	char	rev_path[LIMIT_PATH];
@@ -54,18 +49,15 @@ int	solve(char path_to_end[LIMIT_PATH], int start_row, int start_col, \
 		rev_path[len++] = move_from_parent[cur.row][cur.col];
 		cur = parent[cur.row][cur.col];
 	}
-
 	// If no path found
 	if (len == 0) {
 		path_to_end[0] = '\0';
 		return (0);
 	}
-
 	// Reverse the path to correct order
 	for (int i = 0; i < len; i++)
 		path_to_end[i] = rev_path[len - 1 - i];
 	path_to_end[len] = '\0';
-
 	return (1);
 }
 
