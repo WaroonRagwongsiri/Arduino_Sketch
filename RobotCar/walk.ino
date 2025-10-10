@@ -86,12 +86,11 @@ int	walk(int speed, char path, int *direction, int board[BOARD_SIZE][BOARD_SIZE]
 	// Check if target position is within bounds and walkable
 	if (is_walkable(target_row, target_col, board))
 	{
-		// Move the car - update current position
+		move_one_block(speed);
 		board[*cur_row][*cur_col] = SPACE;
 		*cur_row = target_row;
 		*cur_col = target_col;
 		board[*cur_row][*cur_col] = CAR;
-		move_one_block(speed);
 		return (1);
 	}
 	else

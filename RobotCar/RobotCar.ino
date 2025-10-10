@@ -80,18 +80,25 @@ void	car_to_point(int speed, int end_row, int end_col)
 	}
 }
 
+// Stop 3 secs and beep 2 times
 void	start_to_checkpoint(int speed)
 {
 	beep_buzzer();
+	Serial.println("Start");
 	car_to_point(speed, 0, BOARD_SIZE - 1);
+	Serial.println("Check point");
 	delay(3000);
 	beep_buzzer();
 	beep_buzzer();
 }
 
+// Stop and beep 3 times
 void	checkpoint_to_start(int speed)
 {
+	Serial.println("Start");
 	car_to_point(speed, BOARD_SIZE - 1, 0);
+	Serial.println("Start");
+	delay(3000);
 	beep_buzzer();
 	beep_buzzer();
 	beep_buzzer();
@@ -99,9 +106,9 @@ void	checkpoint_to_start(int speed)
 
 void	push_a_block(int speed)
 {
-	cat_to_point(speed, 3, 2);
+	car_to_point(speed, 3, 2);
 	walk(speed, 'U', &direction, board, &cur_row, &cur_col);
-	cat_to_point(speed, 1, 1);
+	car_to_point(speed, 1, 1);
 	walk(speed, 'R', &direction, board, &cur_row, &cur_col);
 	walk(speed, 'R', &direction, board, &cur_row, &cur_col);
 }
