@@ -34,24 +34,19 @@ void	setup(void)
 	Serial.begin(9600);
 	Serial.flush();
 	digitalWrite(BUZZER, HIGH);
-	start_to_checkpoint(NORMAL_SPEED);
-	checkpoint_to_start(NORMAL_SPEED);
-	push_a_block(NORMAL_SPEED);
-	checkpoint_to_start(NORMAL_SPEED);
+	// start_to_checkpoint(NORMAL_SPEED);
+	// checkpoint_to_start(NORMAL_SPEED);
+	// push_a_block(NORMAL_SPEED);
+	// checkpoint_to_start(NORMAL_SPEED);
 }
 
 void	loop(void)
 {
 	log(0, board);
+	car_to_point(NORMAL_SPEED, 3, 2);
 	delay(1000);
-	// walk(NORMAL_SPEED, 'U', &direction, board, &cur_row, &cur_col);
-	// delay(500);
-	// walk(NORMAL_SPEED, 'R', &direction, board, &cur_row, &cur_col);
-	// delay(500);
-	// walk(NORMAL_SPEED, 'D', &direction, board, &cur_row, &cur_col);
-	// delay(500);
-	// walk(NORMAL_SPEED, 'L', &direction, board, &cur_row, &cur_col);
-	// delay(500);
+	car_to_point(NORMAL_SPEED, 5, 0);
+	delay(1000);
 }
 
 void	car_to_point(int speed, int end_row, int end_col)
