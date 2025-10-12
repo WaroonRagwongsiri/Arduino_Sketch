@@ -34,8 +34,8 @@ void	setup(void)
 	Serial.begin(9600);
 	Serial.flush();
 	digitalWrite(BUZZER, HIGH);
-	// start_to_checkpoint(NORMAL_SPEED);
-	// checkpoint_to_start(NORMAL_SPEED);
+	start_to_checkpoint(NORMAL_SPEED);
+	checkpoint_to_start(NORMAL_SPEED);
 	push_a_block(NORMAL_SPEED);
 	checkpoint_to_start(NORMAL_SPEED);
 }
