@@ -42,8 +42,7 @@
 # define SPACE 0
 # define CAR 1
 # define UNK 2
-# define OBSTA 3
-# define BLOCK 4
+# define BLOCK 3
 
 # define LEFT_CALIBRATE 1
 # define RIGHT_CALIBRATE 1
@@ -65,6 +64,13 @@
 # define TURN_WALK 150
 # define TURN_TIME 250
 # define WALK_TIME 150
+
+// Block Distance
+# define BLOCK1 35
+# define BLOCK2 62
+# define BLOCK3 89
+# define BLOCK4 116
+# define BLOCK5 145
 
 typedef struct s_ir
 {
@@ -101,6 +107,8 @@ void	align_on_line(int speed);
 void	walk_back_til_black(int speed);
 void	line_following_backward(int speed, t_ir ir);
 void	turn_around(int speed);
+void	backward_time(int speed, int time);
+void	forward_time(int speed, int time);
 
 // Ultrasonic
 long	read_ultrasonic(void);

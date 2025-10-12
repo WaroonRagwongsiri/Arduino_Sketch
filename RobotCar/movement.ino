@@ -9,15 +9,7 @@ void	move_one_block(int speed)
 	// Check if we're starting on an intersection
 	read_ir(&ir);
 	if (!isWhite(ir.ll) || !isWhite(ir.rr))
-	{
-		startTime = millis();
-		while (millis() - startTime < WALK_TIME)
-		{
-			read_ir(&ir);
-			line_following(speed, ir);
-		}
-		set_zero();
-	}
+		forward_time(speed, WALK_TIME);
 
 	// Walk until it white
 	read_ir(&ir);
@@ -28,7 +20,7 @@ void	move_one_block(int speed)
 	}
 	set_zero();
 
-	// Walk until it black  
+	// Walk until it black
 	read_ir(&ir);
 	while (isWhite(ir.ll) && isWhite(ir.rr))
 	{
@@ -119,13 +111,7 @@ void turn_left(int speed)
 	}
 
 	// Walk a bit
-	startTime = millis();
-	while (millis() - startTime < TURN_WALK)
-	{
-		read_ir(&ir);
-		line_following(speed, ir);
-	}
-	set_zero();
+	forward_time(speed, TURN_WALK);
 
 	// Turn left a little
 	startTime = millis();
@@ -176,13 +162,7 @@ void turn_right(int speed)
 	}
 
 	// Walk a bit
-	startTime = millis();
-	while (millis() - startTime < TURN_WALK)
-	{
-		read_ir(&ir);
-		line_following(speed, ir);
-	}
-	set_zero();
+	forward_time(speed, TURN_WALK);
 
 	// Turn right a little
 	startTime = millis();
@@ -260,14 +240,7 @@ void	turn_around(int speed)
 		set_zero();
 	}
 
-	// Use line_following for 300ms to clear intersection while staying on line
-	startTime = millis();
-	while (millis() - startTime < 300)
-	{
-		read_ir(&ir);
-		line_following(speed, ir);
-	}
-	set_zero();
+	forward_time(speed, TURN_WALK);
 
 	i = 0;
 	while (i < 2)
@@ -333,6 +306,36 @@ void	align_backward(int speed)
 			shift_left_backward(speed);
 		else
 			line_following_backward(speed, ir);
+	}
+	set_zero();
+}
+
+// Back for X seconds
+void	backward_time(int speed, int time)
+{
+	t_ir			ir;
+	unsigned int	time_start;
+
+	time_start = millis();
+	while (millis() - time_start < 100)
+	{
+		read_ir(&ir);
+		line_following_backward(speed, ir);
+	}
+	set_zero();
+}
+
+// Forward for X seconds
+void	forward_time(int speed, int time)
+{
+	t_ir			ir;
+	unsigned int	time_start;
+
+	time_start = millis();
+	while (millis() - time_start < time)
+	{
+		read_ir(&ir);
+		line_following(speed, ir);
 	}
 	set_zero();
 }

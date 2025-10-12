@@ -8,8 +8,8 @@
 static int	board[BOARD_SIZE][BOARD_SIZE] = {
 	{0,		0,		0,		0,		0,		0},
 	{0,		0,		0,		0,		0,		0},
-	{0,		OBSTA,	BLOCK,	0,		0,		0},
-	{0,		0,		0,		0,		OBSTA,	0},
+	{0,		UNK,	BLOCK,	0,		0,		0},
+	{0,		0,		0,		0,		UNK,	0},
 	{0,		0,		0,		0,		0,		0},
 	{CAR,	0,		0,		0,		0,		0},
 };
@@ -34,8 +34,8 @@ void	setup(void)
 	Serial.begin(9600);
 	Serial.flush();
 	digitalWrite(BUZZER, HIGH);
-	start_to_checkpoint(NORMAL_SPEED);
-	checkpoint_to_start(NORMAL_SPEED);
+	// start_to_checkpoint(NORMAL_SPEED);
+	// checkpoint_to_start(NORMAL_SPEED);
 	push_a_block(NORMAL_SPEED);
 	checkpoint_to_start(NORMAL_SPEED);
 }
@@ -46,7 +46,7 @@ void	loop(void)
 	// car_to_point(NORMAL_SPEED, 3, 2);
 	// delay(1000);
 	// car_to_point(NORMAL_SPEED, 5, 0);
-	// delay(1000);
+	delay(1000);
 }
 
 void	car_to_point(int speed, int end_row, int end_col)
@@ -114,9 +114,12 @@ void	push_a_block(int speed)
 {
 	if (!is_deadzone())
 	{
+		// First push
 		car_to_point(speed, 3, 2);
 		face_direction(speed, 'U', &direction);
 		walk(speed + 20, 'U', &direction, board, &cur_row, &cur_col);
+
+		// Forth push
 		car_to_point(speed, 1, 1);
 		face_direction(speed, 'R', &direction);
 		walk(speed + 20, 'R', &direction, board, &cur_row, &cur_col);
@@ -124,16 +127,23 @@ void	push_a_block(int speed)
 	}
 	else
 	{
+		// First push
 		car_to_point(speed, 1, 2);
 		face_direction(speed, 'D', &direction);
 		walk(speed + 20, 'D', &direction, board, &cur_row, &cur_col);
+
+		// Second push
 		car_to_point(speed, 3, 1);
 		face_direction(speed, 'R', &direction);
 		walk(speed + 20, 'R', &direction, board, &cur_row, &cur_col);
+
+		// Third push
 		car_to_point(speed, 4, 3);
 		face_direction(speed, 'U', &direction);
 		walk(speed + 20, 'U', &direction, board, &cur_row, &cur_col);
 		walk(speed + 20, 'U', &direction, board, &cur_row, &cur_col);
+
+		// Forth push
 		car_to_point(speed, 1, 2);
 		face_direction(speed, 'R', &direction);
 		walk(speed + 20, 'R', &direction, board, &cur_row, &cur_col);
@@ -143,6 +153,8 @@ void	push_a_block(int speed)
 int	is_deadzone(void)
 {
 	if (board[1][0] == UNK || board[2][0] == UNK || board[3][0] == UNK)
+		return (1);
+	if (board[0][1] == UNK || board[0][2] == UNK || board[0][3] == UNK)
 		return (1);
 	return (0);
 }
