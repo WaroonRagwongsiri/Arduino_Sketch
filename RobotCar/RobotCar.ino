@@ -115,21 +115,27 @@ void	push_a_block(int speed)
 	if (!is_deadzone())
 	{
 		car_to_point(speed, 3, 2);
+		face_direction(speed, 'U', &direction);
 		walk(speed + 20, 'U', &direction, board, &cur_row, &cur_col);
 		car_to_point(speed, 1, 1);
+		face_direction(speed, 'R', &direction);
 		walk(speed + 20, 'R', &direction, board, &cur_row, &cur_col);
 		walk(speed + 20, 'R', &direction, board, &cur_row, &cur_col);
 	}
 	else
 	{
 		car_to_point(speed, 1, 2);
+		face_direction(speed, 'D', &direction);
 		walk(speed + 20, 'D', &direction, board, &cur_row, &cur_col);
 		car_to_point(speed, 3, 1);
+		face_direction(speed, 'R', &direction);
 		walk(speed + 20, 'R', &direction, board, &cur_row, &cur_col);
 		car_to_point(speed, 4, 3);
+		face_direction(speed, 'U', &direction);
 		walk(speed + 20, 'U', &direction, board, &cur_row, &cur_col);
 		walk(speed + 20, 'U', &direction, board, &cur_row, &cur_col);
 		car_to_point(speed, 1, 2);
+		face_direction(speed, 'R', &direction);
 		walk(speed + 20, 'R', &direction, board, &cur_row, &cur_col);
 	}
 }
