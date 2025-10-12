@@ -115,30 +115,28 @@ void	push_a_block(int speed)
 	if (!is_deadzone())
 	{
 		car_to_point(speed, 3, 2);
-		walk(speed, 'U', &direction, board, &cur_row, &cur_col);
+		walk(speed + 20, 'U', &direction, board, &cur_row, &cur_col);
 		car_to_point(speed, 1, 1);
-		walk(speed, 'R', &direction, board, &cur_row, &cur_col);
-		walk(speed, 'R', &direction, board, &cur_row, &cur_col);
+		walk(speed + 20, 'R', &direction, board, &cur_row, &cur_col);
+		walk(speed + 20, 'R', &direction, board, &cur_row, &cur_col);
 	}
 	else
 	{
 		car_to_point(speed, 1, 2);
-		walk(speed, 'D', &direction, board, &cur_row, &cur_col);
+		walk(speed + 20, 'D', &direction, board, &cur_row, &cur_col);
 		car_to_point(speed, 3, 1);
-		walk(speed, 'R', &direction, board, &cur_row, &cur_col);
+		walk(speed + 20, 'R', &direction, board, &cur_row, &cur_col);
 		car_to_point(speed, 4, 3);
-		walk(speed, 'U', &direction, board, &cur_row, &cur_col);
-		walk(speed, 'U', &direction, board, &cur_row, &cur_col);
+		walk(speed + 20, 'U', &direction, board, &cur_row, &cur_col);
+		walk(speed + 20, 'U', &direction, board, &cur_row, &cur_col);
 		car_to_point(speed, 1, 2);
-		walk(speed, 'R', &direction, board, &cur_row, &cur_col);
+		walk(speed + 20, 'R', &direction, board, &cur_row, &cur_col);
 	}
 }
 
 int	is_deadzone(void)
 {
-	if (board[1][0] != UNK)
-		return (0);
-	if (board[0][1] != UNK && board[0][2] != UNK && board[0][3] != UNK)
-		return (0);
-	return (1);
+	if (board[1][0] == UNK || board[2][0] == UNK || board[3][0] == UNK)
+		return (1);
+	return (0);
 }
