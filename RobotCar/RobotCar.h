@@ -56,14 +56,18 @@
 # define DIR_LEFT 2
 # define DIR_RIGHT 3
 
-# define LIMIT_PATH 100
+# define LIMIT_PATH 30
 
 # define NORMAL_SPEED 140
 
 // Turn Time
 # define TURN_WALK 150
-# define TURN_TIME 250
+# define TURN_TIME 200
 # define WALK_TIME 150
+
+// Walk speed (Push a block)
+# define WALK_SPEED 140
+# define PUSH_SPEED 160
 
 // Block Distance
 # define BLOCK1 35
@@ -145,5 +149,8 @@ int	can_move(int row, int col, int visited[BOARD_SIZE][BOARD_SIZE], int board[BO
 void	car_to_point(int speed, int end_row, int end_col);
 void	start_to_checkpoint(int speed);
 void	checkpoint_to_start(int speed);
+
+// Ram Utility
+int		free_ram(void);
 
 #endif

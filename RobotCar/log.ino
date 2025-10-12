@@ -26,11 +26,13 @@ void	log(int buz, int board[BOARD_SIZE][BOARD_SIZE])
 	print_board(board);
 	if (buz)
 		beep_buzzer();
+	Serial.print("Free Ram : ");
+	Serial.println(free_ram());
 }
 
 void	beep_buzzer(void)
 {
-	Serial.println("========== Board ==========");
+	Serial.println("========== Buzzer ==========");
 	digitalWrite(BUZZER, LOW);
 	Serial.println("Beep");
 	delay(200);
