@@ -261,10 +261,10 @@ void	align_backward(int speed)
 void	backward_time(int speed, int time)
 {
 	t_ir			ir;
-	unsigned int	time_start;
+	unsigned long	time_start;
 
 	time_start = millis();
-	while (millis() - time_start < 100)
+	while (millis() - time_start < time)
 	{
 		read_ir(&ir);
 		line_following_backward(speed, ir);
@@ -276,7 +276,7 @@ void	backward_time(int speed, int time)
 void	forward_time(int speed, int time)
 {
 	t_ir			ir;
-	unsigned int	time_start;
+	unsigned long	time_start;
 
 	time_start = millis();
 	while (millis() - time_start < time)

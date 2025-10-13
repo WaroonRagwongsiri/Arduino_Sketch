@@ -69,6 +69,9 @@
 # define WALK_SPEED 130
 # define PUSH_SPEED 150
 
+// Push Time
+# define PUSH_TIME 500
+
 // Block Distance
 # define BLOCK1 35
 # define BLOCK2 62
@@ -149,6 +152,8 @@ int	can_move(int row, int col, int visited[BOARD_SIZE][BOARD_SIZE], int board[BO
 void	car_to_point(int speed, int end_row, int end_col);
 void	start_to_checkpoint(int speed);
 void	checkpoint_to_start(int speed);
+void	push_a_block(int speed);
+void	push_walk(char path);
 
 // Ram Utility
 int		free_ram(void);
