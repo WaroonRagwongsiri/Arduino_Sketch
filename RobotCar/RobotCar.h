@@ -48,7 +48,7 @@
 # define RIGHT_CALIBRATE 1
 
 // Color
-# define WHITE_THRESHOLD 500
+# define WHITE_THRESHOLD 400
 
 // Direction
 # define DIR_UP 0
@@ -66,8 +66,8 @@
 # define WALK_TIME 150
 
 // Walk speed (Push a block)
-# define WALK_SPEED 140
-# define PUSH_SPEED 160
+# define WALK_SPEED 130
+# define PUSH_SPEED 150
 
 // Block Distance
 # define BLOCK1 35
