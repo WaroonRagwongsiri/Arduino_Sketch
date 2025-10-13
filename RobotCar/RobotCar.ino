@@ -3,8 +3,7 @@
 // 0 is space
 // 1 is car
 // 2 is UNK
-// 3 is obstacle
-// 4 is block
+// 3 is block
 static int	board[BOARD_SIZE][BOARD_SIZE] = {
 	{0,		0,		0,		0,		0,		0},
 	{0,		0,		0,		0,		0,		0},
@@ -58,20 +57,20 @@ void	car_to_point(int speed, int end_row, int end_col)
 			i = 0;
 			while (walk_path[i])
 			{
-				Serial.flush();
-				log(0, board);
-				Serial.print("Walk Path : ");
-				Serial.println(walk_path);
-				Serial.print("Path going to take : ");
-				Serial.println(walk_path[i]);
+				// Serial.flush();
+				// log(0, board);
+				// Serial.print("Walk Path : ");
+				// Serial.println(walk_path);
+				// Serial.print("Path going to take : ");
+				// Serial.println(walk_path[i]);
 				if (!walk(speed, walk_path[i], &direction, board, &cur_row, &cur_col))
 					break;
-				Serial.flush();
-				log(0, board);
-				Serial.print("Walk Path : ");
-				Serial.println(walk_path);
-				Serial.print("Path taken : ");
-				Serial.println(walk_path[i]);
+				// Serial.flush();
+				// log(0, board);
+				// Serial.print("Walk Path : ");
+				// Serial.println(walk_path);
+				// Serial.print("Path taken : ");
+				// Serial.println(walk_path[i]);
 				i++;
 			}
 		}

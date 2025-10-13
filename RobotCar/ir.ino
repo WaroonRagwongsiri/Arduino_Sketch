@@ -9,7 +9,7 @@ void	read_ir(t_ir *ir)
 	ir->rr = analogRead(IR_RR);
 }
 
-int	isWhite(int sensor_value)
+int	is_white(int sensor_value)
 {
-	return sensor_value > WHITE_THRESHOLD;
+	return (sensor_value > WHITE_THRESHOLD);
 }

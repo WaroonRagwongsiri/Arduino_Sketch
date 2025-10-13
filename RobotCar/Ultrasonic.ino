@@ -14,8 +14,8 @@ long	read_ultrasonic(void)
 		
 	// ADD TIMEOUT
 	duration = pulseIn(ECHO_PIN, HIGH, 20000);
-	if (duration == 0)
-		return (0);
+	if (duration <= 0)
+		return (-1);
 	return to_cm(duration);
 }
 

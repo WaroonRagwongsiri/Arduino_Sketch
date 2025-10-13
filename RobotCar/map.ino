@@ -18,6 +18,8 @@ void	update_map(int board[BOARD_SIZE][BOARD_SIZE], int block_distance, int *dire
 		blocks_away = 4;
 	else if (block_distance <= BLOCK5) // ~5 blocks (130cm+)
 		blocks_away = 5;
+	else
+		return ;
 
 	if (*direction == DIR_UP)
 		target_row = cur_row - blocks_away;

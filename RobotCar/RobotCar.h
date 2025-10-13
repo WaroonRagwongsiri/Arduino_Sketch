@@ -58,11 +58,11 @@
 
 # define LIMIT_PATH 30
 
-# define NORMAL_SPEED 140
+# define NORMAL_SPEED 130
 
 // Turn Time
 # define TURN_WALK 150
-# define TURN_TIME 200
+# define TURN_TIME 150
 # define WALK_TIME 150
 
 // Walk speed (Push a block)
@@ -120,7 +120,7 @@ int		to_cm(long micro_seconds);
 
 // IR sensor
 void	read_ir(t_ir *ir);
-int 	isWhite(int sensor_value);
+int 	is_white(int sensor_value);
 
 // Walk Direction
 void	face_direction(int speed, char path, int *direction);

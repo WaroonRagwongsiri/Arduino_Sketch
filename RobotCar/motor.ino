@@ -29,8 +29,6 @@ void	set_zero(void)
 // Both motor forward
 void	forward(int speed)
 {
-	set_zero();
-	delay(5);
 	analogWrite(ENA, speed * LEFT_CALIBRATE);
 	analogWrite(ENB, speed * RIGHT_CALIBRATE);
 	digitalWrite(INA, HIGH);
@@ -42,8 +40,6 @@ void	forward(int speed)
 // Motor turn right
 void	shift_right(int speed)
 {
-	set_zero();
-	delay(5);
 	analogWrite(ENA, speed * LEFT_CALIBRATE);
 	analogWrite(ENB, 0);
 	digitalWrite(INA, HIGH);
@@ -55,8 +51,6 @@ void	shift_right(int speed)
 // Motor turn left
 void	shift_left(int speed)
 {
-	set_zero();
-	delay(5);
 	analogWrite(ENA, 0);
 	analogWrite(ENB, speed * RIGHT_CALIBRATE);
 	digitalWrite(INA, LOW);
@@ -68,8 +62,6 @@ void	shift_left(int speed)
 // Proper pivot right (for turns)
 void	pivot_right(int speed)
 {
-	set_zero();
-	delay(5);
 	analogWrite(ENA, speed * LEFT_CALIBRATE);
 	analogWrite(ENB, speed * RIGHT_CALIBRATE);
 	digitalWrite(INA, HIGH);
@@ -81,8 +73,6 @@ void	pivot_right(int speed)
 // Proper pivot left (for turns)
 void	pivot_left(int speed)
 {
-	set_zero();
-	delay(5);
 	analogWrite(ENA, speed * LEFT_CALIBRATE);
 	analogWrite(ENB, speed * RIGHT_CALIBRATE);
 	digitalWrite(INA, LOW);
@@ -94,8 +84,6 @@ void	pivot_left(int speed)
 // Both motor backward
 void	backward(int speed)
 {
-	set_zero();
-	delay(5);
 	analogWrite(ENA, speed * LEFT_CALIBRATE);
 	analogWrite(ENB, speed * RIGHT_CALIBRATE);
 	digitalWrite(INA, LOW);
@@ -107,8 +95,6 @@ void	backward(int speed)
 // Motor shift right while moving backward
 void	shift_right_backward(int speed)
 {
-	set_zero();
-	delay(5);
 	analogWrite(ENA, speed * LEFT_CALIBRATE);
 	analogWrite(ENB, 0);
 	digitalWrite(INA, LOW);
@@ -120,8 +106,6 @@ void	shift_right_backward(int speed)
 // Motor shift left while moving backward
 void	shift_left_backward(int speed)
 {
-	set_zero();
-	delay(5);
 	analogWrite(ENA, 0);
 	analogWrite(ENB, speed * RIGHT_CALIBRATE);
 	digitalWrite(INA, LOW);

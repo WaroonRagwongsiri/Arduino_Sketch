@@ -8,12 +8,12 @@ void	move_one_block(int speed)
 
 	// Check if we're starting on an intersection
 	read_ir(&ir);
-	if (!isWhite(ir.ll) || !isWhite(ir.rr))
+	if (!is_white(ir.ll) || !is_white(ir.rr))
 		forward_time(speed, WALK_TIME);
 
 	// Walk until it white
 	read_ir(&ir);
-	while (!isWhite(ir.ll) || !isWhite(ir.rr))
+	while (!is_white(ir.ll) || !is_white(ir.rr))
 	{
 		read_ir(&ir);
 		line_following(speed, ir);
@@ -22,7 +22,7 @@ void	move_one_block(int speed)
 
 	// Walk until it black
 	read_ir(&ir);
-	while (isWhite(ir.ll) && isWhite(ir.rr))
+	while (is_white(ir.ll) && is_white(ir.rr))
 	{
 		read_ir(&ir);
 		line_following(speed, ir);
@@ -31,12 +31,12 @@ void	move_one_block(int speed)
 
 	// Align head
 	read_ir(&ir);
-	while (!isWhite(ir.ll) && !isWhite(ir.rr))
+	while (!is_white(ir.ll) && !is_white(ir.rr))
 	{
 		read_ir(&ir);
-		if (isWhite(ir.ll) && !isWhite(ir.rr))
+		if (is_white(ir.ll) && !is_white(ir.rr))
 			shift_right(speed);
-		else if (!isWhite(ir.ll) && isWhite(ir.rr))
+		else if (!is_white(ir.ll) && is_white(ir.rr))
 			shift_left(speed);
 		else
 			forward(speed);
@@ -47,21 +47,21 @@ void	move_one_block(int speed)
 // Enhanced line following with more sensor combinations
 void	line_following(int speed, t_ir ir)
 {
-	if (!isWhite(ir.lm) && !isWhite(ir.rm))
+	if (!is_white(ir.lm) && !is_white(ir.rm))
 		forward(speed);
-	else if (isWhite(ir.lm) && !isWhite(ir.rm) && isWhite(ir.ll))
+	else if (is_white(ir.lm) && !is_white(ir.rm) && is_white(ir.ll))
 		shift_right(speed * 0.7);
-	else if (!isWhite(ir.lm) && isWhite(ir.rm) && isWhite(ir.rr))
+	else if (!is_white(ir.lm) && is_white(ir.rm) && is_white(ir.rr))
 		shift_left(speed * 0.7);
-	else if (isWhite(ir.lm) && !isWhite(ir.rm))
+	else if (is_white(ir.lm) && !is_white(ir.rm))
 		shift_right(speed * 0.9);
-	else if (!isWhite(ir.lm) && isWhite(ir.rm))
+	else if (!is_white(ir.lm) && is_white(ir.rm))
 		shift_left(speed * 0.9);
-	else if (isWhite(ir.lm) && isWhite(ir.rm))
+	else if (is_white(ir.lm) && is_white(ir.rm))
 	{
-		if (!isWhite(ir.ll) && isWhite(ir.rr))
+		if (!is_white(ir.ll) && is_white(ir.rr))
 			shift_left(speed * 0.6);
-		else if (isWhite(ir.ll) && !isWhite(ir.rr))
+		else if (is_white(ir.ll) && !is_white(ir.rr))
 			shift_right(speed * 0.6);
 		else
 			forward(speed * 0.8);
@@ -76,13 +76,13 @@ void	align_on_line(int speed)
 	t_ir	ir;
 
 	read_ir(&ir);
-	while (!isWhite(ir.lm) || !isWhite(ir.rm))
+	while (!is_white(ir.lm) || !is_white(ir.rm))
 	{
 		read_ir(&ir);
 		
-		if (isWhite(ir.lm) && !isWhite(ir.rm))
+		if (is_white(ir.lm) && !is_white(ir.rm))
 			shift_right(speed);
-		else if (!isWhite(ir.lm) && isWhite(ir.rm))
+		else if (!is_white(ir.lm) && is_white(ir.rm))
 			shift_left(speed);
 		else
 			forward(speed);
@@ -98,11 +98,11 @@ void turn_left(int speed)
 		
 	// If starting on intersection, use line_following to move forward first
 	read_ir(&ir);
-	if (!isWhite(ir.ll) && !isWhite(ir.rr))
+	if (!is_white(ir.ll) && !is_white(ir.rr))
 	{
 		read_ir(&ir);
 		line_following(speed, ir);
-		while (!isWhite(ir.ll) || !isWhite(ir.rr))
+		while (!is_white(ir.ll) || !is_white(ir.rr))
 		{
 			read_ir(&ir);
 			line_following(speed, ir);
@@ -124,7 +124,7 @@ void turn_left(int speed)
 
 	// Pivot until it leaves black (both middle sensors on white)
 	read_ir(&ir);
-	while (!isWhite(ir.lm) || !isWhite(ir.rm))
+	while (!is_white(ir.lm) || !is_white(ir.rm))
 	{
 		read_ir(&ir);
 		pivot_left(speed * 0.8);
@@ -133,7 +133,7 @@ void turn_left(int speed)
 
 	// Pivot until it finds the perpendicular black line
 	read_ir(&ir);
-	while (isWhite(ir.lm) && isWhite(ir.rm))
+	while (is_white(ir.lm) && is_white(ir.rm))
 	{
 		read_ir(&ir);
 		pivot_left(speed * 0.8);
@@ -149,11 +149,11 @@ void turn_right(int speed)
 		
 	// If starting on intersection, use line_following to move forward first
 	read_ir(&ir);
-	if (!isWhite(ir.ll) && !isWhite(ir.rr))
+	if (!is_white(ir.ll) && !is_white(ir.rr))
 	{
 		read_ir(&ir);
 		line_following(speed, ir);
-		while (!isWhite(ir.ll) || !isWhite(ir.rr))
+		while (!is_white(ir.ll) || !is_white(ir.rr))
 		{
 			read_ir(&ir);
 			line_following(speed, ir);
@@ -175,7 +175,7 @@ void turn_right(int speed)
 
 	// Pivot until it leaves black (both middle sensors on white)
 	read_ir(&ir);
-	while (!isWhite(ir.lm) || !isWhite(ir.rm))
+	while (!is_white(ir.lm) || !is_white(ir.rm))
 	{
 		read_ir(&ir);
 		pivot_right(speed * 0.8);
@@ -184,7 +184,7 @@ void turn_right(int speed)
 
 	// Pivot until it finds the perpendicular black line
 	read_ir(&ir);
-	while (isWhite(ir.lm) && isWhite(ir.rm))
+	while (is_white(ir.lm) && is_white(ir.rm))
 	{
 		read_ir(&ir);
 		pivot_right(speed * 0.8);
@@ -198,7 +198,7 @@ void	walk_back_til_black(int speed)
 	t_ir	ir;
 
 	read_ir(&ir);
-	while (isWhite(ir.ll) || isWhite(ir.rr))
+	while (is_white(ir.ll) || is_white(ir.rr))
 	{
 		read_ir(&ir);
 		line_following_backward(speed, ir);
@@ -209,11 +209,11 @@ void	walk_back_til_black(int speed)
 // Line following but backward
 void	line_following_backward(int speed, t_ir ir)
 {
-	if (!isWhite(ir.lm) && !isWhite(ir.rm))
+	if (!is_white(ir.lm) && !is_white(ir.rm))
 		backward(speed);
-	else if (isWhite(ir.lm) && !isWhite(ir.rm))
+	else if (is_white(ir.lm) && !is_white(ir.rm))
 		shift_right_backward(speed);
-	else if (!isWhite(ir.lm) && isWhite(ir.rm))
+	else if (!is_white(ir.lm) && is_white(ir.rm))
 		shift_left_backward(speed);
 	else
 		backward(speed);
@@ -228,11 +228,11 @@ void	turn_around(int speed)
 
 	// If starting on intersection, move forward first
 	read_ir(&ir);
-	if (!isWhite(ir.ll) && !isWhite(ir.rr))
+	if (!is_white(ir.ll) && !is_white(ir.rr))
 	{
 		read_ir(&ir);
 		line_following(speed, ir);
-		while (!isWhite(ir.ll) || !isWhite(ir.rr))
+		while (!is_white(ir.ll) || !is_white(ir.rr))
 		{
 			read_ir(&ir);
 			line_following(speed, ir);
@@ -247,7 +247,7 @@ void	turn_around(int speed)
 	{
 		// Pivot until it leaves black (both middle sensors on white)
 		read_ir(&ir);
-		while (!isWhite(ir.lm) || !isWhite(ir.rm))
+		while (!is_white(ir.lm) || !is_white(ir.rm))
 		{
 			read_ir(&ir);
 			pivot_left(speed * 0.8);
@@ -265,7 +265,7 @@ void	turn_around(int speed)
 
 		// Pivot until it finds the perpendicular black line
 		read_ir(&ir);
-		while (isWhite(ir.lm) && isWhite(ir.rm))
+		while (is_white(ir.lm) && is_white(ir.rm))
 		{
 			read_ir(&ir);
 			pivot_left(speed * 0.8);
@@ -287,22 +287,22 @@ void	align_backward(int speed)
 
 	read_ir(&ir);
 
-	while (!isWhite(ir.ll) || !isWhite(ir.lm) || !isWhite(ir.rm) || !isWhite(ir.rr))
+	while (!is_white(ir.ll) || !is_white(ir.lm) || !is_white(ir.rm) || !is_white(ir.rr))
 	{
 		read_ir(&ir);
 
-		if (!isWhite(ir.lm) && !isWhite(ir.rm))
+		if (!is_white(ir.lm) && !is_white(ir.rm))
 		{
-			if (isWhite(ir.ll) && !isWhite(ir.rr))
+			if (is_white(ir.ll) && !is_white(ir.rr))
 				shift_left_backward(speed);
-			else if (!isWhite(ir.ll) && isWhite(ir.rr))
+			else if (!is_white(ir.ll) && is_white(ir.rr))
 				shift_right_backward(speed);
 			else
 				backward(speed);
 		}
-		else if (!isWhite(ir.lm) && isWhite(ir.rm))
+		else if (!is_white(ir.lm) && is_white(ir.rm))
 			shift_right_backward(speed);
-		else if (isWhite(ir.lm) && !isWhite(ir.rm))
+		else if (is_white(ir.lm) && !is_white(ir.rm))
 			shift_left_backward(speed);
 		else
 			line_following_backward(speed, ir);
