@@ -197,11 +197,26 @@ void	walk_back_til_black(int speed)
 {
 	t_ir	ir;
 
+	// Walk back till one of it is black
 	read_ir(&ir);
-	while (is_white(ir.ll) || is_white(ir.rr))
+	while (is_white(ir.ll) && is_white(ir.rr))
 	{
 		read_ir(&ir);
 		line_following_backward(speed, ir);
+	}
+	set_zero();
+
+	// Allign backward
+	read_ir(&ir);
+	while (!is_white(ir.ll) || !is_white(ir.rr))
+	{
+		read_ir(&ir);
+		if (!is_white(ir.ll) && is_white(ir.rr))
+			shift_left_backward(speed);
+		else if (is_white(ir.ll) && !is_white(ir.rr))
+			shift_right_backward(speed);
+		else
+			backward(speed);
 	}
 	set_zero();
 }
@@ -212,9 +227,9 @@ void	line_following_backward(int speed, t_ir ir)
 	if (!is_white(ir.lm) && !is_white(ir.rm))
 		backward(speed);
 	else if (is_white(ir.lm) && !is_white(ir.rm))
-		shift_right_backward(speed);
-	else if (!is_white(ir.lm) && is_white(ir.rm))
 		shift_left_backward(speed);
+	else if (!is_white(ir.lm) && is_white(ir.rm))
+		shift_right_backward(speed);
 	else
 		backward(speed);
 }

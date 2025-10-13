@@ -28,18 +28,18 @@ void	setup(void)
 	Serial.flush();
 	digitalWrite(BUZZER, HIGH);
 
-	start_to_checkpoint(NORMAL_SPEED);
+	// start_to_checkpoint(NORMAL_SPEED);
 	// checkpoint_to_start(NORMAL_SPEED);
-	push_a_block(NORMAL_SPEED);
-	checkpoint_to_start(NORMAL_SPEED);
+	// push_a_block(NORMAL_SPEED);
+	// checkpoint_to_start(NORMAL_SPEED);
 }
 
 void	loop(void)
 {
 	log(0, board);
 	car_to_point(NORMAL_SPEED, 5, 1);
-	car_to_point(NORMAL_SPEED, 4, 1);
-	car_to_point(NORMAL_SPEED, 4, 0);
+	push_walk('U');
+	car_to_point(NORMAL_SPEED, 5, 2);
 	car_to_point(NORMAL_SPEED, 5, 0);
 	delay(1000);
 }
@@ -107,32 +107,33 @@ void	push_a_block(int speed)
 {
 	// First push
 	car_to_point(WALK_SPEED, 1, 2);
-	face_direction(WALK_SPEED, 'D', &direction);
 	push_walk('D');
 
 	// Second push
 	car_to_point(WALK_SPEED, 3, 1);
-	face_direction(WALK_SPEED, 'R', &direction);
 	push_walk('R');
 
 	// Third push
 	car_to_point(WALK_SPEED, 4, 3);
-	face_direction(WALK_SPEED, 'U', &direction);
-	push_walk('U');
+	walk(PUSH_SPEED, 'U', &direction, board, &cur_row, &cur_col);
 	push_walk('U');
 
 	// Forth push
 	car_to_point(WALK_SPEED, 1, 2);
-	face_direction(WALK_SPEED, 'R', &direction);
 	push_walk('R');
 }
 
 void	push_walk(char path)
 {
+	face_direction(WALK_SPEED, path, &direction);
 	walk(PUSH_SPEED, path, &direction, board, &cur_row, &cur_col);
 	delay(200);
 	forward_time(PUSH_SPEED, PUSH_TIME);
 	delay(200);
-	backward_time(WALK_SPEED, PUSH_TIME);
+	walk_back_til_black(90);
+	delay(200);
+	move_one_block(WALK_SPEED);
+	delay(200);
+	forward_time(WALK_SPEED, 300);
 	delay(200);
 }

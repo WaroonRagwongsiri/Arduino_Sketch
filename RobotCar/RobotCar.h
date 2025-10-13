@@ -70,7 +70,7 @@
 # define PUSH_SPEED 150
 
 // Push Time
-# define PUSH_TIME 500
+# define PUSH_TIME 650
 
 // Block Distance
 # define BLOCK1 35
