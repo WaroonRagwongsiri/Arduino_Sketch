@@ -28,10 +28,10 @@ void	setup(void)
 	Serial.flush();
 	digitalWrite(BUZZER, HIGH);
 
-	// start_to_checkpoint(NORMAL_SPEED);
+	start_to_checkpoint(NORMAL_SPEED);
 	// checkpoint_to_start(NORMAL_SPEED);
-	// push_a_block(NORMAL_SPEED);
-	// checkpoint_to_start(NORMAL_SPEED);
+	push_a_block(NORMAL_SPEED);
+	checkpoint_to_start(NORMAL_SPEED);
 }
 
 void	loop(void)
@@ -130,7 +130,7 @@ void	push_walk(char path)
 	delay(200);
 	forward_time(PUSH_SPEED, PUSH_TIME);
 	delay(200);
-	walk_back_til_black(90);
+	walk_back_til_black(80);
 	delay(200);
 	move_one_block(WALK_SPEED);
 	delay(200);
