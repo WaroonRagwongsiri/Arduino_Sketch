@@ -56,12 +56,12 @@
 # define DIR_LEFT 2
 # define DIR_RIGHT 3
 
-# define LIMIT_PATH 30
+# define LIMIT_PATH 100
 
 # define NORMAL_SPEED 130
 
 // Turn Time
-# define TURN_WALK 150
+# define TURN_WALK 80
 # define TURN_TIME 150
 # define WALK_TIME 150
 

@@ -37,9 +37,8 @@ void	setup(void)
 void	loop(void)
 {
 	log(0, board);
-	// car_to_point(NORMAL_SPEED, 3, 2);
-	// delay(1000);
-	// car_to_point(NORMAL_SPEED, 5, 0);
+	car_to_point(NORMAL_SPEED, 4, 0);
+	car_to_point(NORMAL_SPEED, 5, 0);
 	delay(1000);
 }
 
@@ -58,20 +57,18 @@ void	car_to_point(int speed, int end_row, int end_col)
 			i = 0;
 			while (walk_path[i])
 			{
-				// Serial.flush();
-				// log(0, board);
-				// Serial.print("Walk Path : ");
-				// Serial.println(walk_path);
-				// Serial.print("Path going to take : ");
-				// Serial.println(walk_path[i]);
+				log(0, board);
+				Serial.print("Walk Path : ");
+				Serial.println(walk_path);
+				Serial.print("Path going to take : ");
+				Serial.println(walk_path[i]);
 				if (!walk(speed, walk_path[i], &direction, board, &cur_row, &cur_col))
 					break;
-				// Serial.flush();
-				// log(0, board);
-				// Serial.print("Walk Path : ");
-				// Serial.println(walk_path);
-				// Serial.print("Path taken : ");
-				// Serial.println(walk_path[i]);
+				log(0, board);
+				Serial.print("Walk Path : ");
+				Serial.println(walk_path);
+				Serial.print("Path taken : ");
+				Serial.println(walk_path[i]);
 				i++;
 			}
 		}
@@ -106,64 +103,35 @@ void	checkpoint_to_start(int speed)
 
 void	push_a_block(int speed)
 {
-	const int	f_time = 150;
-	const int	b_time = 300;
+	const int	f_time = 800;
+	const int	b_time = 900;
 
-	if (!is_deadzone())
-	{
-		// First push
-		car_to_point(WALK_SPEED, 3, 2);
-		face_direction(WALK_SPEED, 'U', &direction);
-		walk(PUSH_SPEED, 'U', &direction, board, &cur_row, &cur_col);
-		forward_time(PUSH_SPEED, f_time);
-		backward_time(WALK_SPEED, b_time);
+	// First push
+	car_to_point(WALK_SPEED, 1, 2);
+	face_direction(WALK_SPEED, 'D', &direction);
+	walk(PUSH_SPEED, 'D', &direction, board, &cur_row, &cur_col);
+	forward_time(PUSH_SPEED, f_time);
+	backward_time(WALK_SPEED, b_time);
 
-		// Second push
-		car_to_point(WALK_SPEED, 1, 1);
-		face_direction(WALK_SPEED, 'R', &direction);
-		walk(PUSH_SPEED, 'R', &direction, board, &cur_row, &cur_col);
-		walk(PUSH_SPEED, 'R', &direction, board, &cur_row, &cur_col);
-		forward_time(PUSH_SPEED, f_time);
-		backward_time(WALK_SPEED, b_time);
-	}
-	else
-	{
-		// First push
-		car_to_point(WALK_SPEED, 1, 2);
-		face_direction(WALK_SPEED, 'D', &direction);
-		walk(PUSH_SPEED, 'D', &direction, board, &cur_row, &cur_col);
-		forward_time(PUSH_SPEED, f_time);
-		backward_time(WALK_SPEED, b_time);
+	// Second push
+	car_to_point(WALK_SPEED, 3, 1);
+	face_direction(WALK_SPEED, 'R', &direction);
+	walk(PUSH_SPEED, 'R', &direction, board, &cur_row, &cur_col);
+	forward_time(PUSH_SPEED, f_time);
+	backward_time(WALK_SPEED, b_time);
 
-		// Second push
-		car_to_point(WALK_SPEED, 3, 1);
-		face_direction(WALK_SPEED, 'R', &direction);
-		walk(PUSH_SPEED, 'R', &direction, board, &cur_row, &cur_col);
-		forward_time(PUSH_SPEED, f_time);
-		backward_time(WALK_SPEED, b_time);
+	// Third push
+	car_to_point(WALK_SPEED, 4, 3);
+	face_direction(WALK_SPEED, 'U', &direction);
+	walk(PUSH_SPEED, 'U', &direction, board, &cur_row, &cur_col);
+	walk(PUSH_SPEED, 'U', &direction, board, &cur_row, &cur_col);
+	forward_time(PUSH_SPEED, f_time);
+	backward_time(WALK_SPEED, b_time);
 
-		// Third push
-		car_to_point(WALK_SPEED, 4, 3);
-		face_direction(WALK_SPEED, 'U', &direction);
-		walk(PUSH_SPEED, 'U', &direction, board, &cur_row, &cur_col);
-		walk(PUSH_SPEED, 'U', &direction, board, &cur_row, &cur_col);
-		forward_time(PUSH_SPEED, f_time);
-		backward_time(WALK_SPEED, b_time);
-
-		// Forth push
-		car_to_point(WALK_SPEED, 1, 2);
-		face_direction(WALK_SPEED, 'R', &direction);
-		walk(PUSH_SPEED, 'R', &direction, board, &cur_row, &cur_col);
-		forward_time(PUSH_SPEED, f_time);
-		backward_time(WALK_SPEED, b_time);
-	}
-}
-
-int	is_deadzone(void)
-{
-	if (board[1][0] == UNK || board[2][0] == UNK || board[3][0] == UNK)
-		return (1);
-	if (board[0][1] == UNK || board[0][2] == UNK || board[0][3] == UNK)
-		return (1);
-	return (0);
+	// Forth push
+	car_to_point(WALK_SPEED, 1, 2);
+	face_direction(WALK_SPEED, 'R', &direction);
+	walk(PUSH_SPEED, 'R', &direction, board, &cur_row, &cur_col);
+	forward_time(PUSH_SPEED, f_time);
+	backward_time(WALK_SPEED, b_time);
 }

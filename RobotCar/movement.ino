@@ -222,61 +222,8 @@ void	line_following_backward(int speed, t_ir ir)
 // Turn 180 degree
 void	turn_around(int speed)
 {
-	t_ir			ir;
-	unsigned long	startTime;
-	int				i;
-
-	// If starting on intersection, move forward first
-	read_ir(&ir);
-	if (!is_white(ir.ll) && !is_white(ir.rr))
-	{
-		read_ir(&ir);
-		line_following(speed, ir);
-		while (!is_white(ir.ll) || !is_white(ir.rr))
-		{
-			read_ir(&ir);
-			line_following(speed, ir);
-		}
-		set_zero();
-	}
-
-	forward_time(speed, TURN_WALK);
-
-	i = 0;
-	while (i < 2)
-	{
-		// Pivot until it leaves black (both middle sensors on white)
-		read_ir(&ir);
-		while (!is_white(ir.lm) || !is_white(ir.rm))
-		{
-			read_ir(&ir);
-			pivot_left(speed * 0.8);
-		}
-		set_zero();
-
-		// Turn left a little
-		startTime = millis();
-		while (millis() - startTime < TURN_TIME)
-		{
-			read_ir(&ir);
-			pivot_left(speed * 0.8);
-		}
-		set_zero();
-
-		// Pivot until it finds the perpendicular black line
-		read_ir(&ir);
-		while (is_white(ir.lm) && is_white(ir.rm))
-		{
-			read_ir(&ir);
-			pivot_left(speed * 0.8);
-		}
-		set_zero();
-
-		// Align on black
-		align_on_line(speed * 0.8);
-		set_zero();
-		i++;
-	}
+	turn_right(speed);
+	turn_right(speed);
 	set_zero();
 }
 
