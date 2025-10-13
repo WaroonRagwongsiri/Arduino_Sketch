@@ -28,15 +28,17 @@ void	setup(void)
 	Serial.flush();
 	digitalWrite(BUZZER, HIGH);
 
-	start_to_checkpoint(NORMAL_SPEED);
-	checkpoint_to_start(NORMAL_SPEED);
-	push_a_block(NORMAL_SPEED);
-	checkpoint_to_start(NORMAL_SPEED);
+	// start_to_checkpoint(NORMAL_SPEED);
+	// checkpoint_to_start(NORMAL_SPEED);
+	// push_a_block(NORMAL_SPEED);
+	// checkpoint_to_start(NORMAL_SPEED);
 }
 
 void	loop(void)
 {
 	log(0, board);
+	car_to_point(NORMAL_SPEED, 5, 1);
+	car_to_point(NORMAL_SPEED, 4, 1);
 	car_to_point(NORMAL_SPEED, 4, 0);
 	car_to_point(NORMAL_SPEED, 5, 0);
 	delay(1000);

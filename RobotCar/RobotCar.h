@@ -48,7 +48,7 @@
 # define RIGHT_CALIBRATE 1
 
 // Color
-# define WHITE_THRESHOLD 400
+# define WHITE_THRESHOLD 450
 
 // Direction
 # define DIR_UP 0
@@ -61,8 +61,8 @@
 # define NORMAL_SPEED 130
 
 // Turn Time
-# define TURN_WALK 80
-# define TURN_TIME 150
+# define TURN_WALK 100
+# define TURN_TIME 180
 # define WALK_TIME 150
 
 // Walk speed (Push a block)
