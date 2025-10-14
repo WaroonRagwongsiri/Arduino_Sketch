@@ -205,20 +205,6 @@ void	walk_back_til_black(int speed)
 		line_following_backward(speed, ir);
 	}
 	set_zero();
-
-	// Allign backward
-	read_ir(&ir);
-	while (!is_white(ir.ll) || !is_white(ir.rr))
-	{
-		read_ir(&ir);
-		if (!is_white(ir.ll) && is_white(ir.rr))
-			shift_left_backward(speed);
-		else if (is_white(ir.ll) && !is_white(ir.rr))
-			shift_right_backward(speed);
-		else
-			backward(speed);
-	}
-	set_zero();
 }
 
 // Line following but backward

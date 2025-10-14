@@ -67,10 +67,10 @@
 
 // Walk speed (Push a block)
 # define WALK_SPEED 130
-# define PUSH_SPEED 150
+# define PUSH_SPEED 160
 
 // Push Time
-# define PUSH_TIME 700
+# define PUSH_TIME 850
 
 // Block Distance
 # define BLOCK1 35
