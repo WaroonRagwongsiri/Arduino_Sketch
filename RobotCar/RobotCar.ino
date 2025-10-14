@@ -37,10 +37,10 @@ void	setup(void)
 void	loop(void)
 {
 	log(0, board);
-	car_to_point(NORMAL_SPEED, 5, 1);
-	push_walk('U');
-	car_to_point(NORMAL_SPEED, 5, 2);
-	car_to_point(NORMAL_SPEED, 5, 0);
+	// car_to_point(NORMAL_SPEED, 5, 1);
+	// push_walk('U');
+	// car_to_point(NORMAL_SPEED, 5, 2);
+	// car_to_point(NORMAL_SPEED, 5, 0);
 	delay(1000);
 }
 
