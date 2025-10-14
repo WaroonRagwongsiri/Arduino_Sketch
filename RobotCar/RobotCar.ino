@@ -29,9 +29,9 @@ void	setup(void)
 	digitalWrite(BUZZER, HIGH);
 
 	start_to_checkpoint(NORMAL_SPEED);
-	// checkpoint_to_start(NORMAL_SPEED);
-	push_a_block(NORMAL_SPEED);
 	checkpoint_to_start(NORMAL_SPEED);
+	// push_a_block(NORMAL_SPEED);
+	// checkpoint_to_start(NORMAL_SPEED);
 }
 
 void	loop(void)
@@ -59,18 +59,18 @@ void	car_to_point(int speed, int end_row, int end_col)
 			i = 0;
 			while (walk_path[i])
 			{
-				log(0, board);
-				Serial.print("Walk Path : ");
-				Serial.println(walk_path);
-				Serial.print("Path going to take : ");
-				Serial.println(walk_path[i]);
+				// log(0, board);
+				// Serial.print("Walk Path : ");
+				// Serial.println(walk_path);
+				// Serial.print("Path going to take : ");
+				// Serial.println(walk_path[i]);
 				if (!walk(speed, walk_path[i], &direction, board, &cur_row, &cur_col))
 					break;
-				log(0, board);
-				Serial.print("Walk Path : ");
-				Serial.println(walk_path);
-				Serial.print("Path taken : ");
-				Serial.println(walk_path[i]);
+				// log(0, board);
+				// Serial.print("Walk Path : ");
+				// Serial.println(walk_path);
+				// Serial.print("Path taken : ");
+				// Serial.println(walk_path[i]);
 				i++;
 			}
 		}
@@ -83,9 +83,9 @@ void	car_to_point(int speed, int end_row, int end_col)
 void	start_to_checkpoint(int speed)
 {
 	beep_buzzer();
-	Serial.println("Start");
+	// Serial.println("Start");
 	car_to_point(speed, 0, BOARD_SIZE - 1);
-	Serial.println("Check point");
+	// Serial.println("Check point");
 	delay(3000);
 	beep_buzzer();
 	beep_buzzer();
@@ -94,9 +94,9 @@ void	start_to_checkpoint(int speed)
 // Stop and beep 3 times
 void	checkpoint_to_start(int speed)
 {
-	Serial.println("Check point 2");
+	// Serial.println("Check point 2");
 	car_to_point(speed, BOARD_SIZE - 1, 0);
-	Serial.println("Start 2");
+	// Serial.println("Start 2");
 	delay(3000);
 	beep_buzzer();
 	beep_buzzer();
