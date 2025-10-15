@@ -24,25 +24,33 @@ void	setup(void)
 	pinMode(TRIGGER_PIN, OUTPUT);
 	pinMode(ECHO_PIN, INPUT);
 	pinMode(BUZZER, OUTPUT);
+	pinMode(MODE_BLOCK, INPUT_PULLUP);
+	pinMode(MODE_SAFE, INPUT_PULLUP);
 	Serial.begin(9600);
 	Serial.flush();
 	digitalWrite(BUZZER, HIGH);
-
-	// start_to_checkpoint(NORMAL_SPEED);
-	// checkpoint_to_start(NORMAL_SPEED);
-	push_a_block(NORMAL_SPEED);
-	checkpoint_to_start(NORMAL_SPEED);
 }
 
 void	loop(void)
 {
-	log(0, board);
-	// car_to_point(NORMAL_SPEED, 5, 1);
-	// push_walk('U');
-	// push_walk('U');
-	// car_to_point(NORMAL_SPEED, 5, 2);
-	// car_to_point(NORMAL_SPEED, 5, 0);
-	delay(1000);
+	int	mode_safe;
+	int	mode_block;
+
+	mode_safe = !digitalRead(MODE_SAFE);
+	mode_block = !digitalRead(MODE_BLOCK);
+	if (mode_safe == HIGH)
+	{
+		Serial.println("Safe Mode");
+		start_to_checkpoint(NORMAL_SPEED);
+		checkpoint_to_start(NORMAL_SPEED);
+	}
+	else if (mode_block == HIGH)
+	{
+		Serial.println("Block Mode");
+		start_to_checkpoint(NORMAL_SPEED);
+		push_a_block(NORMAL_SPEED);
+		checkpoint_to_start(NORMAL_SPEED);
+	}
 }
 
 void	car_to_point(int speed, int end_row, int end_col)
@@ -108,28 +116,28 @@ void	push_a_block(int speed)
 {
 	// First push
 	car_to_point(WALK_SPEED, 1, 2);
-	push_walk('D');
+	push_walk('D', 700);
 
 	// Second push
 	car_to_point(WALK_SPEED, 3, 1);
-	push_walk('R');
+	push_walk('R', 850);
 
 	// Third push
 	car_to_point(WALK_SPEED, 4, 3);
-	push_walk('U');
-	push_walk('U');
+	push_walk('U', 800);
+	push_walk('U', 800);
 
 	// Forth push
 	car_to_point(WALK_SPEED, 1, 2);
-	push_walk('R');
+	push_walk('R', 850);
 }
 
-void	push_walk(char path)
+void	push_walk(char path, int push_time)
 {
 	face_direction(WALK_SPEED, path, &direction);
 	walk(PUSH_SPEED, path, &direction, board, &cur_row, &cur_col);
 	delay(200);
-	forward_time(PUSH_SPEED, PUSH_TIME);
+	forward_time(PUSH_SPEED, push_time);
 	delay(200);
-	walk_back_til_black(90);
+	walk_back_til_black(80);
 }

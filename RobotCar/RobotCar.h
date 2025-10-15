@@ -37,6 +37,10 @@
 # define IR_RM A2
 # define IR_RR A1
 
+// Mode Button
+# define MODE_SAFE 2
+# define MODE_BLOCK 3
+
 // Board
 # define BOARD_SIZE 6
 # define SPACE 0
@@ -68,9 +72,6 @@
 // Walk speed (Push a block)
 # define WALK_SPEED 130
 # define PUSH_SPEED 160
-
-// Push Time
-# define PUSH_TIME 850
 
 // Block Distance
 # define BLOCK1 35
@@ -153,7 +154,7 @@ void	car_to_point(int speed, int end_row, int end_col);
 void	start_to_checkpoint(int speed);
 void	checkpoint_to_start(int speed);
 void	push_a_block(int speed);
-void	push_walk(char path);
+void	push_walk(char path, int push_time);
 
 // Ram Utility
 int		free_ram(void);
