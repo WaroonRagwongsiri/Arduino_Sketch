@@ -114,22 +114,38 @@ void	checkpoint_to_start(int speed)
 
 void	push_a_block(int speed)
 {
-	// First push
-	car_to_point(WALK_SPEED, 1, 2);
-	push_walk('D', 700);
+	face_direction(WALK_SPEED, 'L', &direction);
+	update_map(board, read_ultrasonic(), &direction, cur_row, cur_col);
+	if (is_deadzone())
+	{
+		// First push
+		car_to_point(WALK_SPEED, 1, 2);
+		push_walk('D', 700);
 
-	// Second push
-	car_to_point(WALK_SPEED, 3, 1);
-	push_walk('R', 850);
+		// Second push
+		car_to_point(WALK_SPEED, 3, 1);
+		push_walk('R', 850);
 
-	// Third push
-	car_to_point(WALK_SPEED, 4, 3);
-	push_walk('U', 800);
-	push_walk('U', 800);
+		// Third push
+		car_to_point(WALK_SPEED, 4, 3);
+		push_walk('U', 800);
+		push_walk('U', 800);
 
-	// Forth push
-	car_to_point(WALK_SPEED, 1, 2);
-	push_walk('R', 850);
+		// Forth push
+		car_to_point(WALK_SPEED, 1, 2);
+		push_walk('R', 850);
+	}
+	else
+	{
+		// First push
+		car_to_point(WALK_SPEED, 3, 2);
+		push_walk('U', 700);
+
+		// Second push
+		car_to_point(WALK_SPEED, 1, 1);
+		push_walk('R', 800);
+		push_walk('R', 800);
+	}
 }
 
 void	push_walk(char path, int push_time)
@@ -140,4 +156,12 @@ void	push_walk(char path, int push_time)
 	forward_time(PUSH_SPEED, push_time);
 	delay(200);
 	walk_back_til_black(80);
+}
+
+int	is_deadzone(void)
+{
+	if ((board[0][1] != UNK && board[0][2] != UNK && board[0][3] != UNK) || \
+		(board[1][0] != UNK && board[2][0] != UNK && board[3][0] != UNK))
+		return (0);
+	return (1);
 }
