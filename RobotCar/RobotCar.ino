@@ -154,7 +154,7 @@ void	push_walk(char path, int push_time)
 	walk(PUSH_SPEED, path, &direction, board, &cur_row, &cur_col);
 	delay(200);
 	forward_time(PUSH_SPEED, push_time);
-	delay(200);
+	delay(200);g
 	walk_back_til_black(80);
 }
 
